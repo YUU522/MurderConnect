@@ -1,0 +1,2 @@
+module Enduser::HomesHelper
+end

@@ -10,9 +10,13 @@ Rails.application.routes.draw do
     registrations: "enduser/registrations",
     sessions: 'enduser/sessions'
   }
-
+  devise_scope :enduser do
+  post 'users/guest_sign_in', to: 'enduser/sessions#guest_sign_in'
+  end
+  
   scope module: :enduser do
     root to: 'homes#top' # ルートパスを設定
+    
     resources :favorite, only: [:create, :destroy]
     get 'users/confirm_withdrawal'
     patch 'users/withdrawal'
@@ -20,8 +24,13 @@ Rails.application.routes.draw do
     get 'users/participant'
     resources :users, only: [:show, :edit, :update] # 複数形に修正
     resources :participants, only: [:show, :index] # 複数形に修正
-    resources :posts, only: [:show, :index] # 複数形に修正
+    resources :posts, only: [:new, :show, :index] # 複数形に修正
     resources :calendars
+    resources :endusers do
+      member do
+        get 'favorite_users', to: 'users#favorite_users'
+      end
+    end
   end
   
   namespace :admin do

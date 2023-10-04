@@ -1,2 +1,20 @@
-<h1>Enduser::Homes#top</h1>
-<p>Find me in app/views/enduser/homes/top.html.erb</p>
+<style>
+  .container {
+  height: 100%;
+}
+
+.text-center {
+  max-width: 300px; /* 適宜調整 */
+  margin: auto;
+}
+</style>
+
+<body>
+  <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="text-center">
+      <%= link_to "ログイン", new_enduser_session_path, class: "btn btn-primary mb-3" %>
+      <%= link_to "新規登録", new_enduser_registration_path, class: "btn btn-success mb-3" %>
+      <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: "btn btn-info" %>
+    </div>
+  </div>
+</body>

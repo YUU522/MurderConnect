@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_03_083521) do
+ActiveRecord::Schema.define(version: 2023_10_03_082833) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -32,26 +32,17 @@ ActiveRecord::Schema.define(version: 2023_10_03_083521) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "end_users", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "email", null: false
-    t.string "password_digest", null: false
-    t.string "bio", null: false
-    t.integer "playlist_id"
-    t.integer "wantlist_id"
-    t.boolean "is_deleted", default: false, null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["playlist_id"], name: "index_end_users_on_playlist_id"
-    t.index ["wantlist_id"], name: "index_end_users_on_wantlist_id"
-  end
-
   create_table "endusers", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.string "name", null: false
+    t.string "bio", default: ""
+    t.string "playlist", default: ""
+    t.string "wantlist", default: ""
+    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_endusers_on_email", unique: true
@@ -60,7 +51,7 @@ ActiveRecord::Schema.define(version: 2023_10_03_083521) do
 
   create_table "favorites", force: :cascade do |t|
     t.integer "post_id", null: false
-    t.integer "user_id", null: false
+    t.integer "enduser_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -68,12 +59,6 @@ ActiveRecord::Schema.define(version: 2023_10_03_083521) do
   create_table "participants", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "post_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "playlists", force: :cascade do |t|
-    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -101,12 +86,4 @@ ActiveRecord::Schema.define(version: 2023_10_03_083521) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "wantlists", force: :cascade do |t|
-    t.string "name", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  add_foreign_key "end_users", "playlists"
-  add_foreign_key "end_users", "wantlists"
 end

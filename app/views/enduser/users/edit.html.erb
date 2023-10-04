@@ -1,2 +1,25 @@
-<h1>Enduser::Users#edit</h1>
-<p>Find me in app/views/enduser/users/edit.html.erb</p>
+<%= form_with(model: @enduser, local: true, url: user_path(@enduser), method: :patch) do |form| %>
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :bio %>
+    <%= form.text_area :bio %>
+  </div>
+
+  <div class="field">
+    <%= form.label :playlist %>
+    <%= form.text_field :playlist %>
+  </div>
+
+  <div class="field">
+    <%= form.label :wantlist %>
+    <%= form.text_field :wantlist %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit '更新' %>
+  </div>
+<% end %>

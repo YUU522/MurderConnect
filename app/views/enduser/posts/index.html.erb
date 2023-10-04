@@ -1,2 +1,9 @@
-<h1>Enduser::Posts#index</h1>
-<p>Find me in app/views/enduser/posts/index.html.erb</p>
+<%= link_to "新しい投稿", new_post_path, class: "btn btn-primary" %>
+
+<% @posts.each do |post| %>
+  <div class="post">
+    <h2><%= link_to post.title, post %></h2>
+    <p><%= post.body %></p>
+    <!-- 他の投稿情報を表示 -->
+  </div>
+<% end %>

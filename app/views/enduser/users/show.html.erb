@@ -1,37 +1,36 @@
 <div class="container mt-4">
   <div class="row">
-    <div class="col-md-6">
-      <h1>Welcome, <%= @enduser.name %></h1>
-      <p>Bio: <%= @enduser.bio %></p>
-      <p>Playlist: <%= @enduser.playlist %></p>
-      <p>Wantlist: <%= @enduser.wantlist %></p>
-      <div class="actions">
-        <%= link_to "Edit", edit_user_path(@enduser), class: "btn btn-primary" %>
-        <%= link_to "Favorite Users", favorite_users_enduser_path(@enduser), class: "btn btn-secondary" %>
-      </div>
+    <div class="col-md-2">
+      <% if @enduser.profile_picture.present? %>
+        <%= image_tag @enduser.profile_picture, width: "150", height: "150" %>
+      <% else %>
+        <%= image_tag "default_profile_picture.png", width: "100", height: "100" %>
+      <% end %>
+    </div>
+    <div class="col-md-8">
+      <h4><%= @enduser.name %></h4>
+      <p><%= @enduser.bio %></p>
+    </div>
+  </div>
+  
+  <ul class="nav nav-tabs mt-3" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="playlist-tab" data-toggle="tab" href="#playlist" role="tab" aria-controls="playlist" aria-selected="true">通過リスト</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="wantlist-tab" data-toggle="tab" href="#wantlist" role="tab" aria-controls="wantlist" aria-selected="false">やりたい作品</a>
+    </li>
+  </ul>
+
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="playlist" role="tabpanel" aria-labelledby="playlist-tab">
+      <h2>通過リスト</h2>
+      <%= @enduser.playlist %> <!-- ここにプレイリストの表示方法を追加 -->
     </div>
 
-    <div class="col-md-6">
-      <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="playlist-tab" data-toggle="tab" href="#playlist" role="tab" aria-controls="playlist" aria-selected="true">Playlist</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="wantlist-tab" data-toggle="tab" href="#wantlist" role="tab" aria-controls="wantlist" aria-selected="false">Wantlist</a>
-        </li>
-      </ul>
-
-      <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="playlist" role="tabpanel" aria-labelledby="playlist-tab">
-          <h2>Playlist</h2>
-          <%= @enduser.playlist %> <!-- ここにプレイリストの表示方法を追加 -->
-        </div>
-
-        <div class="tab-pane fade" id="wantlist" role="tabpanel" aria-labelledby="wantlist-tab">
-          <h2>Wantlist</h2>
-          <%= @enduser.wantlist %> <!-- ここにウォントリストの表示方法を追加 -->
-        </div>
-      </div>
+    <div class="tab-pane fade" id="wantlist" role="tabpanel" aria-labelledby="wantlist-tab">
+      <h2>やりたい作品</h2>
+      <%= @enduser.wantlist %> <!-- ここにウォントリストの表示方法を追加 -->
     </div>
   </div>
 </div>

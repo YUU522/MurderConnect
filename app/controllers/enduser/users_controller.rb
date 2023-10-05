@@ -6,6 +6,10 @@ class Enduser::UsersController < ApplicationController
     @wantlist = @enduser.wantlist
   end
 
+  def index
+    @users = Enduser.all
+  end
+  
   def edit
     @enduser = current_enduser # 現在のユーザーを取得するメソッドによって設定
   end
@@ -39,6 +43,6 @@ class Enduser::UsersController < ApplicationController
   private
 
   def enduser_params
-  params.require(:enduser).permit(:name, :bio, :playlist, :wantlist)
+  params.require(:enduser).permit(:name, :bio, :playlist, :wantlist, :profile_picture)
   end
 end

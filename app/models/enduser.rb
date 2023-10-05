@@ -3,7 +3,10 @@ class Enduser < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-         
+
+  has_one_attached :image
+  has_one_attached :profile_picture
+
   has_many :posts, dependent: :destroy
   has_many :participants, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -16,5 +19,8 @@ class Enduser < ApplicationRecord
       enduser.name = 'Guest User'  # デフォルトの名前を設定
       # 他のゲストユーザーの属性をここに追加する
     end
+  end
+  def participate!(post)
+    participants.create(post: post)
   end
 end

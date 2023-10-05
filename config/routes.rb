@@ -20,13 +20,12 @@ Rails.application.routes.draw do
     resources :favorite, only: [:create, :destroy]
     get 'users/confirm_withdrawal'
     patch 'users/withdrawal'
-    get 'users/favorite'
     get 'users/participant'
-    resources :users, only: [:show, :edit, :update] # 複数形に修正
-    resources :participants, only: [:show, :index] # 複数形に修正
-    resources :posts, only: [:new, :show, :index] # 複数形に修正
+    resources :posts do
+      resources :participants
+    end
     resources :calendars
-    resources :endusers do
+    resources :users do
       member do
         get 'favorite_users', to: 'users#favorite_users'
       end
@@ -34,10 +33,11 @@ Rails.application.routes.draw do
   end
   
   namespace :admin do
+    root to: 'homes#top'
     get "" => "homes#top"
-    resources :posts, only: [:show, :edit, :update] # 複数形に修正
-    resources :tags, only: [:index, :create, :edit, :update] # 複数形に修正
-    resources :endusers, only: [:index, :show, :edit, :update] # 複数形に修正
+    resources :posts, only: [:show, :edit, :update, :new, :create] 
+    resources :tags#, only: [:index, :create, :edit, :update] 
+    resources :endusers, only: [:index, :show, :edit, :update] 
   end
 
 end

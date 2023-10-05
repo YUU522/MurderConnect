@@ -1,9 +1,15 @@
+
+
 <%= link_to "新しい投稿", new_post_path, class: "btn btn-primary" %>
 
-<% @posts.each do |post| %>
-  <div class="post">
-    <h2><%= link_to post.title, post %></h2>
-    <p><%= post.body %></p>
-    <!-- 他の投稿情報を表示 -->
-  </div>
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
+    <div class="post">
+      <h2><%= link_to post.title, post %></h2>
+      <p><%= post.body %></p>
+      <!-- 他の投稿情報を表示 -->
+    </div>
+  <% end %>
+<% else %>
+  <p>まだ投稿がありません。</p>
 <% end %>

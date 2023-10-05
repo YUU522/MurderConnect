@@ -1,2 +1,11 @@
-<h1>Enduser::Posts#show</h1>
-<p>Find me in app/views/enduser/posts/show.html.erb</p>
+
+<h2><%= @post.title %></h2>
+<p><%= @post.body %></p>
+<p><%= link_to '参加する', post_participants_path(@post), method: :post, class: 'btn btn-primary' %></p>
+
+<!-- 追加 -->
+<h3>投稿情報</h3>
+<p>Title: <%= @post.title %></p>
+<p>URL: <%= @post.url %></p>
+<p>Body: <%= @post.body %></p>
+<p>Tag: <%= @post.tag.tag_title %></p>

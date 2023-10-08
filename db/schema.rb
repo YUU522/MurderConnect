@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_10_05_090922) do
+ActiveRecord::Schema.define(version: 2023_10_07_061404) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -52,7 +52,25 @@ ActiveRecord::Schema.define(version: 2023_10_05_090922) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
+  create_table "calendars", force: :cascade do |t|
+    t.integer "enduser_id"
+    t.string "title"
+    t.text "content"
+    t.datetime "start_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["enduser_id"], name: "index_calendars_on_enduser_id"
+  end
+
   create_table "calenders", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.datetime "start_time", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "calendrs", force: :cascade do |t|
     t.string "title", null: false
     t.text "content", null: false
     t.datetime "start_time", null: false

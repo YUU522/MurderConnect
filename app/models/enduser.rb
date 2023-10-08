@@ -23,4 +23,11 @@ class Enduser < ApplicationRecord
   def participate!(post)
     participants.create(post: post)
   end
+  def participant_for(post)
+    participants.find_by(post_id: post.id)
+  end
+  
+  def guest?
+  name == "Guest User"
+  end
 end

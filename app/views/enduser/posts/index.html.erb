@@ -1,15 +1,19 @@
-
-
-<%= link_to "新しい投稿", new_post_path, class: "btn btn-primary" %>
-
-<% if @posts.any? %>
-  <% @posts.each do |post| %>
-    <div class="post">
-      <h2><%= link_to post.title, post %></h2>
-      <p><%= post.body %></p>
-      <!-- 他の投稿情報を表示 -->
-    </div>
+<div class="container mt-4">
+  <% if @posts.any? %>
+    <% @posts.each do |post| %>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="card-title"><%= link_to post.title, post %></h2>
+          <p class="card-text"><%= post.body %></p>
+          <!-- 他の投稿情報を表示 -->
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>まだ投稿がありません。</p>
   <% end %>
-<% else %>
-  <p>まだ投稿がありません。</p>
-<% end %>
+</div>
+
+<div class="fixed-bottom d-flex justify-content-end p-3">
+  <%= link_to "新しい投稿", new_post_path, class: "btn btn-primary btn-lg" %>
+</div>

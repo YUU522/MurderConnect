@@ -4,7 +4,7 @@ class Enduser::UsersController < ApplicationController
     @favorites = @enduser.favorites
     @playlist = @enduser.playlist
     @wantlist = @enduser.wantlist
-    @calendars = current_enduser.calendars
+    @calendars = @enduser.calendars
     @calendar = Calendar.new
   end
 

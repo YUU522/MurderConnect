@@ -1,32 +1,34 @@
 class Enduser::CalendarsController < ApplicationController
-  
-  before_action :user
+
   def index
-    @calendars = current_user.calendars
+
   end
 
   def show
-    @calendar = current_enduser.calendars.find(params[:id])
+    # @calendar = current_enduser.calendars.find(params[:id])
+    @calendar = Calendar.find(params[:id])
+    pp "@calendar--------------------------#{@calendar.inspect}"
   end
 
   def new
-    @calendars = current_enduser.calendars
+    @calendars = current_user.calendars
   end
 
   def edit
-    @calendar = current_user.calendars.find(params[:id])
+    @calendar = current_enduser.calendars.find(params[:id])
   end
 
   def update
+
     @calendar = current_enduser.calendars.find(params[:id])
     @calendar.update(update_params)
-    redirect_to calendar_path(@user.id)
+    redirect_to user_path(current_enduser)
   end
 
   def create
     @calendar = current_enduser.calendars.new(calendar_memo)
     if @calendar.save
-      redirect_to user_path(@user.id)
+      redirect_to user_path(current_enduser)
     else
       redirect_to new_calendar_path
     end
@@ -35,7 +37,7 @@ class Enduser::CalendarsController < ApplicationController
   def destroy
     @calendars = current_enduser.calendars.find(params[:id])
     @calendars.destroy
-    redirect_to calendars_path(@user.id)
+    redirect_to user_path(current_enduser)
   end
 
 

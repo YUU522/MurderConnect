@@ -1,2 +1,0 @@
-module Enduser::CalendersHelper
-end

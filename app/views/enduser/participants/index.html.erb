@@ -1,2 +1,6 @@
-<h1>Enduser::Participants#index</h1>
-<p>Find me in app/views/enduser/participants/index.html.erb</p>
+<h3 class="mt-4">参加者一覧</h3>
+<ul>
+  <% @post.participants.each do |participant| %>
+    <li><%= participant.enduser.name %></li>
+  <% end %>
+</ul>

@@ -1,2 +1,17 @@
-<h1>Enduser::Posts#show</h1>
-<p>Find me in app/views/enduser/posts/show.html.erb</p>
+<div class="container mt-5">
+  <h2><%= @post.title %></h2>
+
+  <h3 class="mt-4">投稿情報</h3>
+  <p>Tag: <%= @post.tag.tag_title %></p>
+  <p>Title: <%= @post.title %></p>
+  <p>作品ページ: <a href="<%= @post.url %>" target="_blank"><%= @post.url %></a></p>
+  <p>Body: <%= @post.body %></p>
+
+  <% unless current_enduser.guest? %>
+    <% if @post.participanted_by?(current_enduser) %>
+      <%= link_to '参加取り消し', post_participant_path(@post, current_enduser.participant_for(@post)), method: :delete, class: 'btn btn-danger' %>
+  <% else %>
+    <%= link_to '参加する', post_participants_path(@post), method: :post, class: 'btn btn-primary' %>
+  <% end %>
+  <% end %>
+</div>

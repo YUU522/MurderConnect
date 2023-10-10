@@ -1,2 +1,25 @@
-<h1>Enduser::Posts#index</h1>
-<p>Find me in app/views/enduser/posts/index.html.erb</p>
+<form action="/記事検索" method="get">
+  <input type="text" name="q[user_name_cont]" placeholder="ユーザー名">
+  <input type="text" name="q[title_cont]" placeholder="記事のタイトル">
+  <input type="text" name="q[content_cont]" placeholder="記事の内容">
+  <input type="submit" value="検索">
+</form>
+<div class="container mt-4">
+  <% if @posts.any? %>
+    <% @posts.each do |post| %>
+      <div class="card mb-4">
+        <div class="card-body">
+          <h2 class="card-title"><%= link_to post.title, post %></h2>
+          <p class="card-text"><%= post.body %></p>
+          <!-- 他の投稿情報を表示 -->
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p>まだ投稿がありません。</p>
+  <% end %>
+</div>
+
+<div class="fixed-bottom d-flex justify-content-end p-3">
+  <%= link_to "新しい投稿", new_post_path, class: "btn btn-primary btn-lg" %>
+</div>

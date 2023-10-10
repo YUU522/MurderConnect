@@ -1,3 +1,9 @@
+<form action="/記事検索" method="get">
+  <input type="text" name="q[user_name_cont]" placeholder="ユーザー名">
+  <input type="text" name="q[title_cont]" placeholder="記事のタイトル">
+  <input type="text" name="q[content_cont]" placeholder="記事の内容">
+  <input type="submit" value="検索">
+</form>
 <div class="container mt-4">
   <% if @posts.any? %>
     <% @posts.each do |post| %>

@@ -7,4 +7,5 @@ class Post < ApplicationRecord
   def participanted_by?(enduser)
     participants.exists?(enduser_id: enduser.id)
   end
+  
 end

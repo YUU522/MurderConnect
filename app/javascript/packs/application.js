@@ -11,6 +11,8 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
+import "../src/slick"
+
 import "../stylesheets/application"; 
 
 Rails.start()

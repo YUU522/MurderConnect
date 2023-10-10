@@ -3,15 +3,15 @@
 
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <!--==============レイアウトを制御する独自のCSSを読み込み===============-->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+<!--<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">-->
 
 
   <body>
 
     <div class="wrapper">
       <h1>
-          <div>Murder Connect</div>
-          <a href="<%= new_enduser_session_path %>" class="btn btn-primary mb-3 gradient1">ログイン</a>
+          <div class="test">Murder Connect</div>
+          <a href="<%= new_enduser_session_path %>" class="btn btn-primary mb-3 gradient1 test">ログイン</a>
           <a href="<%= new_enduser_registration_path %>" class="btn btn-success mb-3 gradient1">新規登録</a>
           <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: "btn btn-info gradient1" %><br>
           <%= link_to about_path, class: "btntextchange btn btn-info gradient1" do %>
@@ -27,110 +27,10 @@
     <!--/wrapper-->
     </div>
 
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-  <script>
-     $('.slider').slick({
-      autoplay: true,//自動的に動き出すか。初期値はfalse。
-      autoplaySpeed: 3000,//次のスライドに切り替わる待ち時間
-      speed:1000,//スライドの動きのスピード。初期値は300。
-      infinite: true,//スライドをループさせるかどうか。初期値はtrue。
-      slidesToShow: 1,//スライドを画面に3枚見せる
-      slidesToScroll: 1,//1回のスクロールで3枚の写真を移動して見せる
-      arrows: true,//左右の矢印あり
-      prevArrow: '<div class="slick-prev"></div>',//矢印部分PreviewのHTMLを変更
-      nextArrow: '<div class="slick-next"></div>',//矢印部分NextのHTMLを変更
-      dots: true,//下部ドットナビゲーションの表示
-          pauseOnFocus: false,//フォーカスで一時停止を無効
-          pauseOnHover: false,//マウスホバーで一時停止を無効
-          pauseOnDotsHover: false,//ドットナビゲーションをマウスホバーで一時停止を無効
-      });
+  
+  <!--<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>-->
 
-    //スマホ用：スライダーをタッチしても止めずにスライドをさせたい場合
-    $('.slider').on('touchmove', function(event, slick, currentSlide, nextSlide){
-        $('.slider').slick('slickPlay');
-    });
-  </script>
   <style>
-        /*表示するテキストが切り替わる*/
-    .btntextchange{
-        /*テキストの基点とするためrelativeを指定*/
-    	position: relative;
-        /*ボタンの形状*/
-    	border: 1px solid #555;
-    	border-radius:25px;
-        min-width:210px;
-    	padding: 20px;
-        text-align: center;
-    	display: inline-block;
-        text-decoration: none;
-        color: #333;
-        outline: none;
-        /*アニメーションの指定*/
-        transition: all .2s;
-    }
-
-    /*hoverした際の変化*/
-    .btntextchange:hover{
-      outline: none;
-        /*背景の色と形状*/
-        background: linear-gradient(270deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
-        background-position: 1% 50%;
-        background-size: 200% auto;
-        /*アニメーションの指定*/
-        transition: all 0.3s ease-out;
-    }
-
-    .btntextchange span{
-      /*絶対配置でテキストの位置を決める*/
-  	position: absolute;
-  	left: 50%;
-  	top:50%;
-      transform:translate(-50%,-50%);
-      /*アニメーションの指定*/
-      transition: all .5s;
-    /*ブロック要素にしてテキスト折り返しなし*/
-  	display: block;
-  	white-space: nowrap;
-    }
-
-    /*差し替わるテキストの設定*/
-    .btntextchange span:nth-child(2){
-    	opacity:0;/*透過0に*/
-    }
-
-    /*hoverするとテキストが入れ替わる設定*/
-    .btntextchange:hover span:nth-child(1){
-    	opacity:0;/*透過0に*/
-    }
-
-    .btntextchange:hover span:nth-child(2){
-    	opacity:1;/*不透明に*/
-    }
-
-
-    /*== グラデーションが流れる */
-    .gradient1{
-        /*ボタンの形状*/
-        display: inline-block;
-        color:#fff;
-        padding: 18px 60px;
-        border-radius:30px;
-        text-decoration: none;
-        outline: none;
-        /*背景の色と形状*/
-        background: linear-gradient(270deg, #3bade3 0%, #576fe6 25%, #9844b7 51%, #ff357f 100%);
-        background-position: 1% 50%;
-        background-size: 200% auto;
-        /*アニメーションの指定*/
-        transition: all 0.3s ease-out;
-    }
-    /*hoverした際の、背景の場所とテキスト色の変更*/
-    .gradient1:hover {
-        color: #fff;
-        background-position: 99% 50%;
-    }
-
     .slider {
         position:relative;
       z-index: 1;
@@ -213,50 +113,6 @@
         background:#333;/*ドットボタンの現在地表示の色*/
     }
 
-    /*========= レイアウトのためのCSS ===============*/
-    ul{
-      margin:0;
-      padding: 0;
-      list-style: none;
-    }
-
-    a{
-      color: #fff;
-    }
-
-    a:hover,
-    a:active{
-      text-decoration: none;
-    }
-
-    h1{
-      position: absolute;
-      z-index: 2;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      font-size:6vw;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-
-    .wrapper{
-      position: relative;
-    }
-
-    .container{
-      background:#555;
-    }
-
-    .container p{
-      padding: 300px 0;
-      text-align: center;
-      color: #fff;
-    }
-    .header {
-      display: none;
-    }
     </style>
   </body>
 </html>

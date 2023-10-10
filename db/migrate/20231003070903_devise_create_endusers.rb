@@ -36,7 +36,7 @@ class DeviseCreateEndusers < ActiveRecord::Migration[6.1]
       t.string :playlist, default: '' # プレイリストへの外部キー
       t.string :wantlist, default: '' # 希望リストへの外部キー
       t.boolean :is_deleted, null: false, default: false
-
+      
       t.timestamps null: false
     end
 

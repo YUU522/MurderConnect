@@ -24,7 +24,7 @@ class Enduser::UsersController < ApplicationController
   
   def edit
     @enduser = current_enduser # 現在のユーザーを取得するメソッドによって設定
-    @calendar = Calendar.find(params[:id])
+    # @calendar = Calendar.find(params[:id])
   end
 
   def update

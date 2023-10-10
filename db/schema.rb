@@ -62,24 +62,22 @@ ActiveRecord::Schema.define(version: 2023_10_07_061404) do
     t.index ["enduser_id"], name: "index_calendars_on_enduser_id"
   end
 
-  create_table "calenders", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "content", null: false
-    t.datetime "start_time", null: false
+  create_table "endusers", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "name", null: false
+    t.string "bio", default: ""
+    t.string "playlist", default: ""
+    t.string "wantlist", default: ""
+    t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_endusers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_endusers_on_reset_password_token", unique: true
   end
-
-  create_table "calendrs", force: :cascade do |t|
-    t.string "title", null: false
-    t.text "content", null: false
-    t.datetime "start_time", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-# Could not dump table "endusers" because of following StandardError
-#   Unknown type 'attachement' for column 'profile_picture'
 
   create_table "favorites", force: :cascade do |t|
     t.integer "post_id", null: false

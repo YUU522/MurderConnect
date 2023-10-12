@@ -29,6 +29,7 @@
           <%= link_to "フォローする", user_relationships_path(@enduser.id), method: :post %>
         <% end %>
       <% end %>
+      <%= link_to "投稿一覧", posts_path(enduser_id: @enduser.id) %>
     </div>
 
     <div class="col-md-4 col-12 text-md-right"> <!-- text-rightを追加 -->

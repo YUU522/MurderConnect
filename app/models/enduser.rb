@@ -40,6 +40,17 @@ class Enduser < ApplicationRecord
   name == "Guest User"
   end
   
+  def self.search_for(content, method)
+    if method == 'perfect'
+      Enduser.where(name: content)
+    elsif method == 'forward'
+      Enduser.where('name LIKE ?', content + '%')
+    elsif method == 'backward'
+      Enduser.where('name LIKE ?', '%' + content)
+    else
+      Enduser.where('name LIKE ?', '%' + content + '%')
+    end
+  end
   
      # フォローしたときの処理
   def follow(enduser_id)

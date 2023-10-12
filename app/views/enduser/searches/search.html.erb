@@ -1,0 +1,23 @@
+<% if @model == 'user' %>
+  <h3>Users search for "<%= @content %>"</h3>
+  <% @records.each do |user| %>
+    <% unless user.email == "guest@example.com" %>
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to user.name, user_url(user) %>
+            </h5>
+            <p class="card-text"><%= user.bio %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% elsif @model == 'post' %>
+  <h3>Posts search for "<%= @content %>"</h3>
+  <%= render 'enduser/posts/posts', {posts: @records} %>
+<% elsif @model == 'hashtag' %>
+  <h3>ハッシュタグ with hashtag #"<%= @content %>"</h3>
+  <%= render 'enduser/posts/posts', {posts: @records} %>
+<% end %>

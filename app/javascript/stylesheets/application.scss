@@ -1,2 +1,15 @@
 @use '~bootstrap/scss/bootstrap';
 @import './top';
+  footer {
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            position: fixed; /* 追加 */
+            bottom: 0; /* 追加 */
+            width: 100%; /* 追加 */
+        }
+
+        p {
+            margin: 0; /* デフォルトのマージンを削除 */
+        }

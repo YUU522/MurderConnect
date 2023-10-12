@@ -1,0 +1,7 @@
+<% if posts.present? && posts.any? %>
+  <% posts.each do |post| %>
+    <%= render 'enduser/posts/post', {post: post} %>
+  <% end %>
+  <% else %>
+  <p>まだ投稿がありません。</p>
+<% end %>

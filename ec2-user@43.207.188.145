@@ -1,0 +1,4 @@
+DB_USERNAME=root
+DB_PASSWORD=Kuromu2750
+DB_HOST=rds-mysql-server.c7e116uqbbzz.ap-northeast-1.rds.amazonaws.com
+DB_DATABASE=MurderConnect

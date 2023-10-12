@@ -1,0 +1,10 @@
+<h2>ハッシュタグ #<%= @tag.hashname %></h2>
+  <ul>
+    <% @posts.each do |post| %>
+      <li>
+        <%= link_to posts_path(post.id) do %>
+          
+        <% end %>
+      </li>
+    <% end %>
+  </ul>

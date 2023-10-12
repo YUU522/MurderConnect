@@ -7,11 +7,17 @@ class Enduser::PostsController < ApplicationController
       end
     end
 
-  def index
-    puts "Current enduser: #{current_enduser.inspect}"
+def index
+  @users = Enduser.all
+  @user_id = params[:enduser_id]
+
+  if @user_id.present?
+    @posts = Enduser.find(@user_id).posts
+  else
     @posts = Post.all
   end
-  
+end
+
   def create
     @post = current_enduser.posts.new(post_params)
 
@@ -24,11 +30,24 @@ class Enduser::PostsController < ApplicationController
       render :index
     end
   end
-  
+
+  def destroy
+      @post = Post.find(params[:id])
+      @post.destroy
+      redirect_to posts_path, notice: '投稿が削除されました。'
+  end
+
   def show
     @post = Post.find(params[:id])
+    @tag = Tag.find(@post.tag_id)
   end
   
+  def hashtag
+    @user = current_user
+    @tag = Hashtag.find_by(hashname: params[:name])
+    @posts = @tag.posts
+  end
+
   private
 
   def post_params

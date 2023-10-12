@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     get 'users/confirm_withdrawal'
     patch 'users/withdrawal'
     get 'users/participant'
+    get '/post/hashtag/:name', to: "posts#hashtag"
     resources :posts do
       resources :participants
     end
@@ -32,6 +33,8 @@ Rails.application.routes.draw do
           get 'followings' => 'relationships#followings', as: 'followings'
           get 'followers' => 'relationships#followers', as: 'followers'
     end
+    get "search" => "searches#search"
+    
   end
 
   namespace :admin do

@@ -17,5 +17,5 @@ class Enduser::SearchesController < ApplicationController
       else
         @records = Post.search_for(@content, @method)
       end
-    end
+  end
 end

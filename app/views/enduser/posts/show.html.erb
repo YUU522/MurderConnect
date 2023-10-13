@@ -1,3 +1,4 @@
+
 <div class="container mt-5">
   <h2><%= @post.title %></h2>
 
@@ -5,18 +6,21 @@
   <p>Tag: <%= @post.tag.tag_title %></p>
   <p>投稿者名: <%= @post.enduser.name %></p>
   <p>Title: <%= @post.title %></p>
+  <%= image_tag @post.og_image if @post.og_image.present? %>
   <p>作品ページ: <a href="<%= @post.url %>" target="_blank"><%= @post.url %></a></p>
   <p>Body: <%= @post.body %></p>
+
   ハッシュタグ:
-<% @post.hashtags.each do |hashtag| %>
-  <%= link_to "##{hashtag.hashname}", search_path(content: "#{hashtag.hashname}", model: "post", method: "perfect") %>
-<% end %>
+  <% @post.hashtags.each do |hashtag| %>
+    <%= link_to "##{hashtag.hashname}", search_path(content: "#{hashtag.hashname}", model: "post", method: "perfect") %>
+  <% end %>
+
   <% unless current_enduser.guest? %>
     <% if @post.participanted_by?(current_enduser) %>
       <%= link_to '参加取り消し', post_participant_path(@post, current_enduser.participant_for(@post)), method: :delete, class: 'btn btn-danger' %>
-  <% else %>
-    <%= link_to '参加する', post_participants_path(@post), method: :post, class: 'btn btn-primary' %>
-  <% end %>
+    <% else %>
+      <%= link_to '参加する', post_participants_path(@post), method: :post, class: 'btn btn-primary' %>
+    <% end %>
   <% end %>
 </div>
 

@@ -3,8 +3,9 @@ class Post < ApplicationRecord
   has_many :participants, dependent: :destroy
   belongs_to :enduser
   belongs_to :tag
-  has_many :post_hashtag_relations
-  has_many :hashtags, through: :post_hashtag_relations
+  has_many :post_hashtag_relations , dependent: :destroy
+  has_many :hashtags, through: :post_hashtag_relations, dependent: :destroy
+  has_one_attached :thumbnail
 
   def self.search_for(content, method)
     if method == 'perfect'
@@ -47,5 +48,12 @@ class Post < ApplicationRecord
         post.hashtags << tag
       end
     end
-
+    def og_image
+      og = OpenGraph.new(self.url)
+      # og.title # => "Open Graph protocol"
+      # og.type # => "website"
+      # og.url # => "http://ogp.me/"
+      # og.description # => "The Open Graph protocol enables any web page to become a rich object in a social graph."
+      return og.images[0] # => ["http://ogp.me/logo.png"]
+    end
 end

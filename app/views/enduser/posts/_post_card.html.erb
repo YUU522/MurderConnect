@@ -10,8 +10,11 @@
             <div class="card-body">
               <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
               <p class="card-text">投稿者名: <%= link_to post.enduser.name, user_path(post.enduser) %></p>
-              <a class="poster" data-poster="<%= truncate(post.body, length: 70, separator: ' ', omission: '...') %>"><%= truncate(post.body, length: 70, separator: ' ', omission: '...') %></a>
-              <span class="full-text" style="display:none;"><%= post.body %></span>
+              <% clean_body = post.body.gsub(/\n/, ' ') %>
+              <a class="poster" data-poster="<%= truncate(clean_body, length: 70, separator: ' ', omission: '...') %>">
+                <%= truncate(clean_body, length: 70, separator: ' ', omission: '...') %>
+              </a>
+              <span class="full-text" style="display:none;"><%= simple_format(post.body) %></span>
               <a class="show-more-link">詳細を見る</a>
               <a class="show-less-link" style="display:none;">元に戻す</a>
               <% post.hashtags.each do |hashtag| %>
@@ -118,6 +121,7 @@ $(window).on('load', function () {
     GethashID (hashName);
 });
 
+
 document.addEventListener('DOMContentLoaded', function() {
   var showMoreLinks = document.querySelectorAll('.show-more-link');
   var showLessLinks = document.querySelectorAll('.show-less-link');
@@ -132,6 +136,10 @@ document.addEventListener('DOMContentLoaded', function() {
       fullTextElement.style.display = 'inline'; // 全文を表示
       this.style.display = 'none'; // 詳細を見るリンクを非表示
       showLessLink.style.display = 'inline'; // 元に戻すリンクを表示
+
+      var fullText = fullTextElement.innerHTML;
+      fullText = fullText.replace(/<br>/g, ''); // 全ての<br>タグを削除
+      fullTextElement.innerHTML = fullText;
     });
   });
 
@@ -142,7 +150,7 @@ showLessLinks.forEach(function(link) {
     var truncatedTextElement = this.parentElement.querySelector('.poster');
     var card = this.closest('.card'); // カード要素を取得
 
-    truncatedTextElement.innerText = truncatedTextElement.dataset.poster;
+    truncatedTextElement.innerHTML = truncatedTextElement.dataset.poster; // HTMLを元に戻す
     truncatedTextElement.style.display = 'inline';
     fullTextElement.style.display = 'none';
     showMoreLink.style.display = 'inline';
@@ -163,10 +171,12 @@ showLessLinks.forEach(function(link) {
 
   // 詳細が70文字以内の場合に詳細を見るボタンと元に戻すボタンを非表示にする
   var posters = document.querySelectorAll('.poster');
-
-  posters.forEach(function(poster) {
-    if (poster.innerText.length < 69) {
-      var showMoreLink = poster.nextElementSibling;
+  var full_texts = document.querySelectorAll('.full-text');
+  full_texts.forEach(function(full_text) {
+    console.log(full_text.innerText)
+    console.log(full_text.innerText.length)
+    if (full_text.innerText.length < 71) {
+      var showMoreLink = full_text.nextElementSibling;
       var showLessLink = showMoreLink.nextElementSibling;
 
       showMoreLink.style.display = 'none';

@@ -6,7 +6,6 @@
       <%= f.label :model_user, "ユーザー名", class: "white-text" %>
       <%= f.radio_button :model, "post", class: "custom-radio" %>
       <%= f.label :model_post, "投稿検索", class: "white-text" %>
-      <%= f.select :method, options_for_select({"完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial"}, {class: "custom-select"}) %>
       <%= f.submit "検索", style: "padding: 5px 10px; border: none; background-color: #7b7d8a; color: #fff; border-radius: 3px; cursor: pointer;" %>
     <% end %>
   </div>

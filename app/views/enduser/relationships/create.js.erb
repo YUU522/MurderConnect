@@ -1,0 +1,2 @@
+$("#follow_buttons_<%= @enduser.id %>").html("<%= j(render 'enduser/relationships/follow_button', enduser: @enduser) %>");
+$("#follow_counts_<%= @enduser.id %>").html("<%= j(render 'enduser/relationships/followers_count', enduser: @enduser) %>");

@@ -18,4 +18,4 @@
 
 <%= link_to 'Edit', edit_calendar_path(@calendar) %> |
 <%= link_to '消去',calendar_path(@calendar.id), method: :delete, data: { confirm: '本当に?' } %>
-<%= link_to 'Back', calendar_path %>
+<%= link_to 'Back', 'javascript:history.go(-1);', class: 'btn btn-secondary' %>

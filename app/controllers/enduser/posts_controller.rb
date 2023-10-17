@@ -8,26 +8,27 @@ class Enduser::PostsController < ApplicationController
     end
 
 def index
-  @users = Enduser.all
-  @user_id = params[:enduser_id]
+  @tags = Tag.all # タグを取得
 
-  if @user_id.present?
-    @posts = Enduser.find(@user_id).posts
+  if params[:enduser_id].present?
+    @user = Enduser.find(params[:enduser_id])
+    # 特定のユーザーに関連する投稿を取得
+    @user_posts = @user.posts.includes(:hashtags, :tag)
   else
-    @posts = Post.all
+    # 全ての投稿を取得
+    @user_posts = Post.includes(:hashtags, :tag)
   end
 end
 
   def create
     @post = current_enduser.posts.new(post_params)
-
+  
     if @post.save
       redirect_to @post, notice: '投稿が作成されました。'
     else
-      @posts = Post.all
-      flash[:alert] = '投稿にエラーがあります。'
-      flash[:errors] = @post.errors.full_messages
-      render :index
+       @tags = Tag.all
+        flash.now[:alert] = '投稿にエラーがあります。'
+        render :new # new.html.erbを表示します
     end
   end
 

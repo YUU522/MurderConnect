@@ -34,7 +34,7 @@ Rails.application.routes.draw do
           get 'followers' => 'relationships#followers', as: 'followers'
     end
     get "search" => "searches#search"
-    
+
   end
 
   namespace :admin do
@@ -42,7 +42,7 @@ Rails.application.routes.draw do
     get "" => "homes#top"
     resources :posts, only: [:show, :edit, :update, :new, :create]
     resources :tags#, only: [:index, :create, :edit, :update]
-    resources :endusers, only: [:index, :show, :edit, :update]
+    resources :endusers
   end
 
 end

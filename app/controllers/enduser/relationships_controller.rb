@@ -2,12 +2,12 @@ class Enduser::RelationshipsController < ApplicationController
   # フォローするとき
   def create
     current_enduser.follow(params[:user_id])
-    redirect_to request.referer
+    @enduser = Enduser.find(params[:user_id])
   end
   # フォロー外すとき
   def destroy
     current_enduser.unfollow(params[:user_id])
-    redirect_to request.referer  
+    @enduser = Enduser.find(params[:user_id])
   end
   # フォロー一覧
   def followings

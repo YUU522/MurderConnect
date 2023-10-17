@@ -1,0 +1,9 @@
+    フォロー数:
+    <%= link_to user_followings_path(enduser.id), class: "some-class", local: true do %>
+       <%= enduser.followings.count %>
+    <% end %>
+
+    フォロワー数:
+    <%= link_to user_followers_path(enduser.id), class: "some-class", local: true do %>
+       <%= enduser.followers.count %>
+    <% end %>

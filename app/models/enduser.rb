@@ -20,12 +20,20 @@ class Enduser < ApplicationRecord
   has_many :calendars, dependent: :destroy
   attr_accessor :custom_playlist_name
   attr_accessor :custom_wantlist_name
+  
+  validates :name, presence: true, uniqueness: true, length: { minimum: 3, maximum: 20 }
+  validates :encrypted_password, presence: true, length: { minimum: 6 }, confirmation: true
+  
   def self.guest
     find_or_create_by(email: 'guest@example.com') do |enduser|
       enduser.password = SecureRandom.urlsafe_base64
       enduser.name = 'Guest User'  # デフォルトの名前を設定
       # 他のゲストユーザーの属性をここに追加する
     end
+  end
+  
+  def active_for_authentication?
+    super && (is_deleted == false)
   end
   
   def participate!(post)

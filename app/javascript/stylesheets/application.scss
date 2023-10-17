@@ -1,5 +1,9 @@
 @use '~bootstrap/scss/bootstrap';
 @import './top';
+
+  header {
+    height: 40px;
+  }
   footer {
             text-align: center;
             background-color: rgba(0, 0, 0, 0.5);
@@ -8,8 +12,12 @@
             position: fixed; /* 追加 */
             bottom: 0; /* 追加 */
             width: 100%; /* 追加 */
+            height: 40px;
         }
 
         p {
             margin: 0; /* デフォルトのマージンを削除 */
+        }
+        body {
+          padding-bottom: 40px; /* フッターの高さと同じ値を指定 */
         }

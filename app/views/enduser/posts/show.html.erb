@@ -15,7 +15,7 @@
     <%= link_to "##{hashtag.hashname}", search_path(content: "#{hashtag.hashname}", model: "post", method: "perfect") %>
   <% end %>
 
-  <% unless current_enduser.guest? %>
+  <% unless current_enduser.nil? || current_enduser.guest? %>
     <% if @post.participanted_by?(current_enduser) %>
       <%= link_to '参加取り消し', post_participant_path(@post, current_enduser.participant_for(@post)), method: :delete, class: 'btn btn-danger' %>
     <% else %>

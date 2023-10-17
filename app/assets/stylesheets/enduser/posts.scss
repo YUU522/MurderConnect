@@ -1,3 +1,14 @@
 // Place all the styles related to the enduser/posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+.new_button{
+position: fixed;
+bottom: 50px;
+right: 20px;
+transition:1s;
+opacity:0.7;
+}
+.new_button:hover{
+opacity:1;
+}

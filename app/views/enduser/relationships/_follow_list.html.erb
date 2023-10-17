@@ -1,21 +1,23 @@
 <% if @endusers.exists? %>
   <% @endusers.each do |enduser| %>
-    <table>
-      <thead>
-        <tr>
-          <th>name</th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><%= link_to enduser.name, user_path(enduser) %></td>
-          <td>フォロー数: <%= enduser.followings.count %></td>
-          <td>フォロワー数: <%= enduser.followers.count %></td>
-        </tr>
-      </tbody>
-    </table>
+    <% unless enduser.is_deleted %>
+      <table>
+        <thead>
+          <tr>
+            <th>name</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= link_to enduser.name, user_path(enduser) %></td>
+            <td>フォロー数: <%= enduser.followings.count %></td>
+            <td>フォロワー数: <%= enduser.followers.count %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
   <% end %>
 <% else %>
   <p>ユーザーはいません</p>

@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <%= form_for(@post, html: {class: "card p-4"}) do |f| %>
+  <%= form_for(@post, url: posts_path, html: {class: "card p-4"}) do |f| %>
     <div class="form-group">
       <%= f.label :title %>
       <%= f.text_field :title, class: 'form-control', placeholder: 'タイトルを入力してください' %>

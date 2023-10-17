@@ -1,35 +1,24 @@
+<% unless @enduser.is_deleted %>
 <div class="container mt-4">
   <div class="row">
-    <div class="col-md-2 col-4"> <!-- col-md-2 から col-md-2 col-4 に変更 -->
-      <% if @enduser.profile_picture.present? %>
-        <%= image_tag @enduser.profile_picture, width: "150", height: "150" %>
-      <% else %>
-        <%= image_tag "default_profile_picture.png", width: "100", height: "100" %>
-      <% end %>
+    <div class="col-md-2 col-4">
+    <% if @enduser && @enduser.profile_picture.present? %>
+      <%= image_tag @enduser.profile_picture, width: "150", height: "150" %>
+    <% else %>
+      <%= image_tag "default_profile_picture.png", width: "100", height: "100" %>
+    <% end %>
     </div>
     <div class="col-md-6 col-8"> <!-- col-md-6 から col-md-6 col-8 に変更 -->
 
       <h4><%= @enduser.name %></h4>
-        フォロー数:
-        <%= link_to user_followings_path(@enduser.id), class: "some-class" do %>
-           <%= @enduser.followings.count %>
-        <% end %>
-
-        フォロワー数:
-        <%= link_to user_followers_path(@enduser.id), class: "some-class" do %>
-           <%= @enduser.followers.count %>
-        <% end %>
-
+      <p id="follow_counts_<%= @enduser.id %>">
+        <%= render 'enduser/relationships/followers_count', enduser: @enduser %>
+      </p>
       <p><%= @enduser.bio %></p>
-
-      <% unless current_enduser == @enduser %>
-        <% if current_enduser.following?(@enduser) %>
-          <%= link_to "フォロー外す", user_relationships_path(@enduser.id), method: :delete %>
-        <% else %>
-          <%= link_to "フォローする", user_relationships_path(@enduser.id), method: :post %>
-        <% end %>
-      <% end %>
-      <%= link_to "投稿一覧", posts_path(enduser_id: @enduser.id) %>
+      <p id="follow_buttons_<%= @enduser.id %>">
+        <%= render 'enduser/relationships/follow_button', enduser: @enduser %>
+      </p>
+        <%= link_to "投稿一覧", posts_path(enduser_id: @enduser.id) %>
     </div>
 
     <div class="col-md-4 col-12 text-md-right"> <!-- text-rightを追加 -->
@@ -58,6 +47,7 @@
     </div>
   </div>
 
+
   <!-- カレンダーのフォーム -->
   <% if current_enduser == @enduser %>
   <%= form_with(model: @calendar, local: true, url: '/calendars?id='+params[:id], class: 'mt-4') do |form| %>
@@ -80,9 +70,9 @@
       <%= form.submit 'Submit', class: 'btn btn-primary' %>
     </div>
   <% end %>
-</div>
-<% end %>
 
+<% end %>
+</div>
 <div class="container mt-5">
   <%= month_calendar events: @calendars do |date, calendars| %>
     <div class="date">
@@ -96,3 +86,6 @@
     <% end %>
   <% end %>
 </div>
+<% else %>
+  <p>ユーザーはいません</p>
+<% end %>

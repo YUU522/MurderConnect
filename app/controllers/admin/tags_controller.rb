@@ -8,6 +8,10 @@ class Admin::TagsController < ApplicationController
     @admin_tags = Tag.all # 例: すべてのタグを取得して @admin_tags に代入
   end
   
+  def edit
+    @tag = Tag.find(params[:id])
+  end
+  
   def create
     @tag = Tag.new(tag_params)
   
@@ -16,6 +20,12 @@ class Admin::TagsController < ApplicationController
     else
       render :new
     end
+  end
+  
+  def destroy
+    @tag = Tag.find(params[:id])
+    @tag.destroy
+    redirect_to admin_tags_path, notice: 'タグが削除されました'
   end
 
   private

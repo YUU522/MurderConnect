@@ -1,0 +1,11 @@
+ <ul class="list-group mt-3">
+    <% admin_tags.each do |tag| %>
+      <li class="list-group-item">
+        <%= tag.tag_title %>
+        <span class="float-right">
+          <%= link_to "編集", edit_admin_tag_path(tag), local: true ,class: "btn btn-secondary btn-sm mr-2" %>
+          <%= link_to "削除", admin_tag_path(tag), method: :delete, remote: true ,data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger btn-sm" %>
+        </span>
+      </li>
+    <% end %>
+  </ul>

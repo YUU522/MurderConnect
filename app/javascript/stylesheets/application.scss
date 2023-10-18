@@ -4,20 +4,30 @@
   header {
     height: 40px;
   }
-  footer {
-            text-align: center;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
-            padding: 10px;
-            position: fixed; /* 追加 */
-            bottom: 0; /* 追加 */
-            width: 100%; /* 追加 */
-            height: 40px;
-        }
+footer {
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 10px;
+  position: fixed; /* 追加 */
+  bottom: 0; /* 追加 */
+  width: 100%; /* 追加 */
+  height: 40px;
+}
 
-        p {
-            margin: 0; /* デフォルトのマージンを削除 */
-        }
-        body {
-          padding-bottom: 40px; /* フッターの高さと同じ値を指定 */
-        }
+p {
+    margin: 0; /* デフォルトのマージンを削除 */
+}
+body {
+  padding-bottom: 40px; /* フッターの高さと同じ値を指定 */
+}
+.custom-select {
+  padding: 5px;
+  border: none;
+  border-radius: 3px;
+  width: 150px; /* 幅の設定 */
+  /* その他のスタイルを追加 */
+}
+.white-text {
+  color: white; /* テキストの色を白に設定 */
+}

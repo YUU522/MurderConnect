@@ -11,18 +11,19 @@ class Enduser::UsersController < ApplicationController
   def new
     @calendar = Calendar.new
   end
-  
+
   def index
     @users = Enduser.all
     @calendars = Calendar.all
   end
-  
+
   def create
     Calendar.create(board_params)
     redirect_to boards_path
   end
-  
+
   def edit
+    is_matching_login_enduser
     @enduser = current_enduser # 現在のユーザーを取得するメソッドによって設定
     # @calendar = Calendar.find(params[:id])
   end
@@ -36,13 +37,13 @@ class Enduser::UsersController < ApplicationController
         render :edit
       end
   end
-  
+
   def destroy
     @calendar = Calendar.find(params[:id])
     @calendar.destroy
     redirect_to calendars_path, notice:"削除しました"
   end
-  
+
   def confirm_withdrawal
   end
 
@@ -59,6 +60,14 @@ class Enduser::UsersController < ApplicationController
     @favorite_users = current_enduser.favorites.map(&:enduser)
   end
 
+
+  def is_matching_login_enduser
+    enduser = Enduser.find(params[:id])
+      unless enduser.id == current_enduser.id
+        redirect_to posts_path
+      end
+  end
+  
   private
   def board_params
     params.require(:board).permit(:title, :content, :start_time)

@@ -1,27 +1,30 @@
-
 <div class="container mt-5">
-  <h2><%= @post.title %></h2>
-
-  <h3 class="mt-4">投稿情報</h3>
-  <p>Tag: <%= @post.tag.tag_title %></p>
-  <p>投稿者名: <%= @post.enduser.name %></p>
-  <p>Title: <%= @post.title %></p>
-  <%= image_tag @post.og_image if @post.og_image.present? %>
-  <p>作品ページ: <a href="<%= @post.url %>" target="_blank"><%= @post.url %></a></p>
-  <p>Body: <%= @post.body %></p>
-
-  ハッシュタグ:
-  <% @post.hashtags.each do |hashtag| %>
-    <%= link_to "##{hashtag.hashname}", search_path(content: "#{hashtag.hashname}", model: "post", method: "perfect") %>
-  <% end %>
-
-  <% unless current_enduser.nil? || current_enduser.guest? %>
-    <% if @post.participanted_by?(current_enduser) %>
-      <%= link_to '参加取り消し', post_participant_path(@post, current_enduser.participant_for(@post)), method: :delete, class: 'btn btn-danger' %>
-    <% else %>
-      <%= link_to '参加する', post_participants_path(@post), method: :post, class: 'btn btn-primary' %>
-    <% end %>
-  <% end %>
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-3">
+          <%= image_tag @post.og_image, class: "card-img-top", width: "200", height: "200" if @post.og_image.present? %>
+        </div>
+        <div class="col-9">
+          <h2 class="card-title"><%= @post.title %></h2>
+          <p class="card-text">作品ページ: <a href="<%= @post.url %>" target="_blank"><%= @post.url %></a></p>
+          <p class="card-text">Body: <%= simple_format(@post.body) %></p>
+          <h5 class="card-subtitle mb-2 text-muted mt-3">ハッシュタグ</h5>
+          <% @post.hashtags.each do |hashtag| %>
+            <%= link_to "##{hashtag.hashname}", search_path(content: "#{hashtag.hashname}", model: "post", method: "perfect"), class: "badge badge-primary mr-2" %>
+          <% end %>
+          <% unless current_enduser.nil? || current_enduser.guest? %>
+            <div class="mt-4">
+              <% if @post.participanted_by?(current_enduser) %>
+                <%= link_to '参加取り消し', post_participant_path(@post, current_enduser.participant_for(@post)), method: :delete, class: 'btn btn-danger' %>
+              <% else %>
+                <%= link_to '参加する', post_participants_path(@post), method: :post, class: 'btn btn-primary' %>
+              <% end %>
+            </div>
+          <% end %>
+          <%= link_to '投稿を削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger mt-3' %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-
-<%= link_to '投稿を削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>

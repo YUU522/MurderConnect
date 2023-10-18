@@ -1,23 +1,14 @@
-<h1>Create a New Tag</h1>
-
-<%= form_with model: @tag, url: admin_tags_path, local: true do |form| %>
-  <div class="field">
-    <%= form.label :tag_title %>
-    <%= form.text_field :tag_title %>
-    
+<div class="container mt-5">
+  <h1>タグの新規作成</h1>
+  <div id="tag_new">
+    <%= render 'tag_new',tag: @tag %>
   </div>
+</div>
 
-  <div class="actions">
-    <%= form.submit "Create Tag", class: "btn btn-primary" %>
+<div class="container mt-5">
+  <h1>タグ一覧</h1>
+  <div id="tag_lists">
+    <%= render 'tag_list',admin_tags: @admin_tags %>
   </div>
-<% end %>
+</div>
 
-<h1>Tag List</h1>
-
-<ul>
-  <% @admin_tags.each do |tag| %>
-    <li><%= tag.tag_title %></li>
-      <%= link_to "編集", edit_admin_tag_path(tag), class: "btn btn-secondary" %>
-      <%= link_to "削除", admin_tag_path(tag), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
-  <% end %>
-</ul>

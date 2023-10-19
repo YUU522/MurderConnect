@@ -1,21 +1,29 @@
+<div class="container mt-5">
 
-<p id="notice"><%= notice %></p>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title"><strong>タイトル</strong></h5>
+      <p class="card-text"><%= @calendar.title %></p>
+    </div>
+  </div>
 
-<p>
-  <strong>タイトル</strong>
-  <%= @calendar.title %>
-</p>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title"><strong>時間</strong></h5>
+      <p class="card-text"><%= @calendar.start_time.strftime("%Y-%m-%d %H:%M") %></p>
+    </div>
+  </div>
 
-<p>
-  <strong>時間</strong>
-  <%= @calendar.start_time.strftime("%Y-%m-%d %H:%M") %>
-</p>
+  <div class="card mt-3">
+    <div class="card-body">
+      <h5 class="card-title"><strong>内容</strong></h5>
+      <p class="card-text"><%= @calendar.content %></p>
+    </div>
+  </div>
 
-<p>
-  <strong>内容</strong>
-  <%= @calendar.content %>
-</p>
-
-<%= link_to 'Edit', edit_calendar_path(@calendar) %> |
-<%= link_to '消去',calendar_path(@calendar.id), method: :delete, data: { confirm: '本当に?' } %>
-<%= link_to 'Back', 'javascript:history.go(-1);', class: 'btn btn-secondary' %>
+  <div class="mt-3">
+    <%= link_to '編集', edit_calendar_path(@calendar), class: 'btn btn-primary' %>
+    <%= link_to '削除', calendar_path(@calendar.id), method: :delete, data: { confirm: '本当に削除しますか?' }, class: 'btn btn-danger' %>
+    <%= link_to '戻る', 'javascript:history.go(-1);', class: 'btn btn-secondary' %>
+  </div>
+</div>

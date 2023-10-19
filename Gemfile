@@ -67,3 +67,4 @@ gem "net-pop"
 gem "net-imap"
 gem "opengraph_parser"
 gem 'jquery-rails'
+gem 'rails-i18n'

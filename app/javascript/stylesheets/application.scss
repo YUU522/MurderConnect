@@ -1,5 +1,6 @@
 @use '~bootstrap/scss/bootstrap';
 @import './top';
+@import url('https://fonts.googleapis.com/css2?family=BIZ+UDMincho&family=Noto+Serif+JP:wght@300;400&family=Zen+Maru+Gothic&display=swap');
 
   header {
     height: 40px;
@@ -19,6 +20,8 @@ p {
     margin: 0; /* デフォルトのマージンを削除 */
 }
 body {
+  font-family: 'BIZ UDMincho', serif;
+font-family: 'Noto Serif JP', serif;
   padding-bottom: 40px; /* フッターの高さと同じ値を指定 */
 }
 .custom-select {

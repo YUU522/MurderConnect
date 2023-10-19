@@ -21,8 +21,9 @@
   <body>
     <% if !@hide_header %>
     <header class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="<%= root_path %>">MyLogo</a>
-
+      <a class="navbar-brand" href="<%= root_path %>">
+        <img src="<%= asset_path('logo.png') %>" alt="MyLogo" width="200" height="50" style="margin-top: 30px;">
+      </a>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <% if current_enduser %>

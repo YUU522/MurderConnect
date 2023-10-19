@@ -30,7 +30,7 @@ class Enduser::UsersController < ApplicationController
 
   def update
     @enduser = current_enduser # 現在のユーザーを取得するメソッドによって設定
-    @calendar = Calendar.find(params[:id])
+    @calendar = Enduser.find(params[:id])
       if @enduser.update(enduser_params)
       redirect_to user_url(@enduser), notice: 'プロフィールが更新されました。'
       else

@@ -73,11 +73,11 @@ Post.find_or_create_by!(title: "竜眼湖伝説殺人事件") do |post|
   post.url = "https://booth.pm/ja/items/4831586"
 end
 
-Post.find_or_create_by!(enduser_id: 1) do |post|
+
+Post.find_or_create_by!(title: "あやかし夜行奇譚") do |post|
   post.tag_id = 1
-  post.title = "あやかし夜行奇譚"
-  post.body = "【日時】10/15(日)　20:00～25:00(予定)
-【募集人員】7名
+  post.enduser_id = 1
+  post.body = "【募集人員】7名
 【配信/録画】不可（GMの録画を参加者のみに公開）
 【観戦】不可
 【プレイ形態】Discord＋ココフォリア
@@ -97,9 +97,9 @@ GMの独断で参加をお断りする可能性がございます
   post.url = "https://booth.pm/ja/items/4572165"
 end
 
-Post.find_or_create_by!(enduser_id: 1) do |post|
+Post.find_or_create_by!(title: "僕はデブリになりたい") do |post|
   post.tag_id = 1
-  post.title = "僕はデブリになりたい"
+  post.enduser_id = 1
   post.body = "【日時】10/16 21:00-
 【募集人数】3名（確定PL @まっちゃ ）
 【プレイ形態】discord+ココフォリア
@@ -114,9 +114,10 @@ Post.find_or_create_by!(enduser_id: 1) do |post|
 ・ココフォリアが問題なく動作すること＃僕デブ"
   post.url = "https://booth.pm/ja/items/4699307"
 end
-Post.find_or_create_by!(enduser_id: 1) do |post|
+
+Post.find_or_create_by!(title: "エイダ") do |post|
   post.tag_id = 1
-  post.title = "エイダ"
+  post.enduser_id = 1
   post.body = "【日時】10月19日（木）20時～
 【募集人員】PL5（先着順）
 【観戦】可能（通過者のみ）
@@ -134,10 +135,11 @@ Post.find_or_create_by!(enduser_id: 1) do |post|
 ・BOOTH確認した方＃エイダ"
   post.url = "https://booth.pm/ja/items/4124519"
 end
-Post.find_or_create_by!(enduser_id: 1) do |post|
+
+Post.find_or_create_by!(title: "星空のマリス") do |post|
   post.tag_id = 1
-  post.title = "星空のマリス"
-  post.body = "【日時】10/21(土) 13:00～18:00(予定)
+  post.enduser_id = 1
+  post.body =  "【日時】10/21(土) 13:00～18:00(予定)
 【使用シナリオ】星空のマリス
 【募集人員】7名
 【観戦】不可
@@ -156,6 +158,7 @@ Post.find_or_create_by!(enduser_id: 1) do |post|
 ・前科ロールのない方＃マリス"
   post.url = "https://ibarayugi.booth.pm/items/3078406"
 end
+
 
 Post.find_or_create_by!(enduser_id: 2) do |post|
   post.tag_id = 1
@@ -183,8 +186,8 @@ Post.find_or_create_by!(enduser_id: 2) do |post|
 を記載のうえ参加表明をお願いいたします🙇＃僕デブ"
   post.url = "https://booth.pm/ja/items/4699307"
 end
-Post.find_or_create_by!(enduser_id: 2) do |post|
-  post.tag_id = 2
+Post.find_or_create_by!(tag_id: 2) do |post|
+  post.enduser_id = 2
   post.title = "エイダ"
   post.body = "【日時】10/28   20時30分〜 
 【募集人員】4名
@@ -201,10 +204,11 @@ Post.find_or_create_by!(enduser_id: 2) do |post|
 ※GM経験少ない為不慣れな部分等あります、ご理解いただけると幸いです。＃エイダ"
   post.url = "https://booth.pm/ja/items/4124519"
 end
-Post.find_or_create_by!(enduser_id: 2) do |post|
+
+Post.find_or_create_by!(title: "ブルーホールミステリー第一弾") do |post|
   post.tag_id = 1
-  post.title = "ブルーホールミステリー第一弾「夜明けの町と奇跡のブルー」"
-  post.body = "【募集人数】4名 (+1名確定 )
+  post.enduser_id = 1
+  post.body =  "【募集人数】4名 (+1名確定 )
 【GM】りおん様( @りおん )
 【日時】10月22日(日) 14時～
 【時間】4時間～5時間
@@ -222,6 +226,7 @@ Post.find_or_create_by!(enduser_id: 2) do |post|
 ・どんな結末や過程でも楽しくセッションできる方す＃ブルミス"
   post.url = "https://booth.pm/ja/items/3844572"
 end
+
 Post.find_or_create_by!(enduser_id: 3) do |post|
   post.tag_id = 1
   post.title = "アンドロイドの告解"

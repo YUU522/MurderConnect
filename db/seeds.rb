@@ -6,17 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # Admin.create!(email: '123@456', password: '123456')
-kurokuro = Enduser.find_or_create_by!(email: "kuro@example.com") do |enduser|
+Enduser.find_or_create_by!(email: "kuro@example.com") do |enduser|
   enduser.name = "くろくろ"
   enduser.password = "111111"
 end
 
-akira = Enduser.find_or_create_by!(email: "akira@example.com") do |enduser|
+Enduser.find_or_create_by!(email: "akira@example.com") do |enduser|
   enduser.name = "あきら"
   enduser.password = "111111"
 end
 
-yunika = Enduser.find_or_create_by!(email: "yunika@example.com") do |enduser|
+Enduser.find_or_create_by!(email: "yunika@example.com") do |enduser|
   enduser.name = "ゆにか"
   enduser.password = "111111"
 end

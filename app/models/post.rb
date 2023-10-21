@@ -53,7 +53,7 @@ class Post < ApplicationRecord
       # og.url # => "http://ogp.me/"
       # og.description # => "The Open Graph protocol enables any web page to become a rich object in a social graph."
       return og.images[0] # => ["http://ogp.me/logo.png"]
-    end
+    end 
     def og_title
       og = OpenGraph.new(self.url)
       # og.title # => "Open Graph protocol"

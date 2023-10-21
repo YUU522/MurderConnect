@@ -69,9 +69,9 @@ ActiveRecord::Schema.define(version: 2023_10_21_045342) do
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.string "name", null: false
-    t.text "bio", default: ""
-    t.text "playlist", default: ""
-    t.text "wantlist", default: ""
+    t.text "bio"
+    t.text "playlist"
+    t.text "wantlist"
     t.boolean "is_deleted", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

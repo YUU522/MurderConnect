@@ -6,6 +6,14 @@ class Enduser::UsersController < ApplicationController
     @wantlist = @enduser.wantlist
     @calendars = @enduser.calendars
     @calendar = Calendar.new
+    @wantlist_parts = @enduser.wantlist.split("\n")
+    @sorted_wantlist_parts = @wantlist_parts.sort
+    @sorted_wantlist = @sorted_wantlist_parts.join("\n")
+    @playlist_parts = @enduser.playlist.split("\n")
+    @sorted_playlist_parts = @playlist_parts.sort_by do |item|
+      item.tr('ぁ-ん', 'ァ-ン') # ひらがなをカタカナに変換して比較する
+    end
+    @sorted_playlist = @sorted_playlist_parts.join("\n")
   end
 
   def new

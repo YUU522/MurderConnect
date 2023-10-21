@@ -42,13 +42,11 @@
 
   <div class="tab-content" id="myTabContent">
     <div class="tab-pane fade show active" id="playlist" role="tabpanel" aria-labelledby="playlist-tab">
-      <h2>通過リスト</h2>
-      <%= raw @enduser.playlist %> <!-- ここにプレイリストの表示方法を追加 -->
+      <%= raw "<p>" + @sorted_playlist.gsub("\n", "</p><p>") + "</p>".html_safe %>
     </div>
 
     <div class="tab-pane fade" id="wantlist" role="tabpanel" aria-labelledby="wantlist-tab">
-      <h2>やりたい作品</h2>
-      <%= @enduser.wantlist.gsub("\n", "<br>") %> <!-- ここにウォントリストの表示方法を追加 -->
+      <%= raw "<p>" + @sorted_wantlist.gsub("\n", "</p><p>") + "</p>".html_safe %>
     </div>
 
     <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">

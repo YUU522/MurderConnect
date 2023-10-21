@@ -6,18 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # Admin.create!(email: '123@456', password: '123456')
-
-Enduser.find_or_create_by!(email: "kuro@example.com") do |enduser|
+kurokuro = Enduser.find_or_create_by!(email: "kuro@example.com") do |enduser|
   enduser.name = "くろくろ"
   enduser.password = "111111"
 end
 
-Enduser.find_or_create_by!(email: "akira@example.com") do |enduser|
+akira = Enduser.find_or_create_by!(email: "akira@example.com") do |enduser|
   enduser.name = "あきら"
   enduser.password = "111111"
 end
 
-Enduser.find_or_create_by!(email: "yunika@example.com") do |enduser|
+yunika = Enduser.find_or_create_by!(email: "yunika@example.com") do |enduser|
   enduser.name = "ゆにか"
   enduser.password = "111111"
 end
@@ -28,7 +27,7 @@ end
 Tag.find_or_create_by!(tag_title: "GM") do |tag|
 end
 
-Post.find_or_create_by!(enduser_id: 2) do |post|
+Post.find_or_create_by!(enduser_id: 1) do |post|
   post.tag_id = 1
   post.title = "たとえこの身を捧げても"
   post.body = "募集人数3人です＃みささげ"
@@ -56,7 +55,7 @@ Post.find_or_create_by!(title: "竜眼湖伝説殺人事件") do |post|
   post.body = "【日時】 10/15 (日)　21:30 ～ 23:30 予定 (+感想戦)
 【募集人員】 5名(先着)
 【観戦】 通過者のみ可
-【プレイ形態】 DiscordによるVC 
+【プレイ形態】 DiscordによるVC
 【予想プレイ時間】 約2時間 + 感想戦
 【特記事項】
 ・イヤフォンマイク、ヘッドセットマイクなどを必ず用意して下さい。
@@ -189,7 +188,7 @@ end
 Post.find_or_create_by!(tag_id: 2) do |post|
   post.enduser_id = 3
   post.title = "エイダ"
-  post.body = "【日時】10/28   20時30分〜 
+  post.body = "【日時】10/28   20時30分〜
 【募集人員】4名
 【観戦】無し
 【プレイ形態】ココフォリア＋Discord
@@ -218,7 +217,7 @@ Post.find_or_create_by!(title: "ブルーホールミステリー第一弾") do 
 【備考】
 ※イヤホンマイク又はヘッドセットでハウリング対策を行ってください。
 ※通過者は参加できません。
-※読み合わせ要素が少し多いです。 
+※読み合わせ要素が少し多いです。
 ※早く集まりましたら事前HO決定をさせて頂きます。
 
 【参加条件】
@@ -239,7 +238,7 @@ Post.find_or_create_by!(enduser_id: 4) do |post|
 ・キャラクターの心情を重視してロールプレイをしたい方
 ・多弁、強弁を控え、常識的なマナーを守り、初心者の方とも楽しく遊べる方
 ・自己紹介とシナリオ体験リストを記載済みの方
-・前科ロールが付与されていない方 
+・前科ロールが付与されていない方
 ・PCでゲームにご参加いただける方
 ・ハウリング等のノイズ対策をされていること（イヤホンマイク/ヘッドセット推奨）
 ・連絡がスムーズに取れる方

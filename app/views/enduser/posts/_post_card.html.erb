@@ -5,7 +5,11 @@
         <div class="col-md-3">
           <div class="card" style="width: 100%; height: 400px; margin: 10px;">
             <%= link_to post_path(post) do %>
-              <%= image_tag post.og_image, class: "fixed-size-image" if post.og_image.present? %>
+              <% if post.og_image.present? %>
+                <%= image_tag post.og_image, class: "fixed-size-image" %>
+              <% else %>
+                <%= image_tag "noimage.png", class: "fixed-size-image" %>
+              <% end %>
             <% end %>
             <div class="card-body">
               <h5 class="card-title"><%= link_to post.title, post_path(post) %></h5>
@@ -17,10 +21,9 @@
               <span class="full-text" style="display:none;"><%= simple_format(post.body) %></span>
               <a class="show-more-link">詳細を見る</a>
               <a class="show-less-link" style="display:none;">元に戻す</a>
-              <% post.hashtags.each do |hashtag| %>
+              ハッシュタグ:<% post.hashtags.limit(3).each do |hashtag| %>
                 <%= link_to "##{hashtag.hashname}", search_path(content: "##{hashtag.hashname}", model: "post", method: "perfect") %>
               <% end %>
-              タグ: <%= post.tag.tag_title %>
             </div>
           </div>
         </div>
@@ -37,7 +40,7 @@
 }
 .fixed-size-image {
   width: 100%; /* 例: 幅を300ピクセルに指定 */
-  height: 200px; /* 例: 高さを200ピクセルに指定 */
+  height: 170px; /* 例: 高さを200ピクセルに指定 */
   object-fit: cover; /* 画像を親要素にフィットさせる */
 }
 

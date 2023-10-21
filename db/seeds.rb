@@ -7,17 +7,17 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 # Admin.create!(email: '123@456', password: '123456')
 
-くろ = Enduser.find_or_create_by!(email: "kuro@example.com") do |enduser|
+Enduser.find_or_create_by!(email: "kuro@example.com") do |enduser|
   enduser.name = "くろくろ"
   enduser.password = "111111"
 end
 
-あきら = Enduser.find_or_create_by!(email: "akira@example.com") do |enduser|
+Enduser.find_or_create_by!(email: "akira@example.com") do |enduser|
   enduser.name = "あきら"
   enduser.password = "111111"
 end
 
-ゆにか = Enduser.find_or_create_by!(email: "yunika@example.com") do |enduser|
+Enduser.find_or_create_by!(email: "yunika@example.com") do |enduser|
   enduser.name = "ゆにか"
   enduser.password = "111111"
 end

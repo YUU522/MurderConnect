@@ -4,6 +4,6 @@ class Enduser::HomesController < ApplicationController
     @hide_footer = true
   end
   def about
-    
+    render :layout => 'application_about'
   end
 end

@@ -1,6 +1,6 @@
 <% unless @enduser.is_deleted %>
 <div class="container mt-4">
-  <div class="row">
+  <div class="row pt-3">
     <div class="col-md-2 col-4">
     <% if @enduser && @enduser.profile_picture.present? %>
       <%= image_tag @enduser.profile_picture, width: "150", height: "150" %>
@@ -95,3 +95,9 @@
 <% else %>
   <p>ユーザーはいません</p>
 <% end %>
+
+<style>
+  .container{
+    background: rgba(255, 255, 255, 0.5);
+  }
+</style>

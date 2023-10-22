@@ -6,25 +6,27 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 # Admin.create!(email: '123@456', password: '123456')
-Enduser.find_or_create_by!(email: "kuro@example.com") do |enduser|
-  enduser.name = "くろくろ"
-  enduser.password = "111111"
+Admin.find_or_create_by!(email: "123@456") do |admin|
+  admin.password = "123456"
 end
 
-Enduser.find_or_create_by!(email: "akira@example.com") do |enduser|
-  enduser.name = "あきら"
-  enduser.password = "111111"
+# Enduserのシードデータ
+endusers_data = [
+  { email: "kuro@example.com", name: "くろくろ", password: "111111" },
+  { email: "akira@example.com", name: "あきら", password: "111111" },
+  { email: "yunika@example.com", name: "ゆにか", password: "111111" }
+]
+endusers_data.each do |data|
+  Enduser.find_or_create_by!(email: data[:email]) do |enduser|
+    enduser.name = data[:name]
+    enduser.password = data[:password]
+  end
 end
 
-Enduser.find_or_create_by!(email: "yunika@example.com") do |enduser|
-  enduser.name = "ゆにか"
-  enduser.password = "111111"
-end
-
-Tag.find_or_create_by!(tag_title: "PL") do |tag|
-end
-
-Tag.find_or_create_by!(tag_title: "GM") do |tag|
+# Tagのシードデータ
+tag_titles = ["PL", "GM"]
+tag_titles.each do |title|
+  Tag.find_or_create_by!(tag_title: title)
 end
 
 Post.find_or_create_by!(enduser_id: 1) do |post|
@@ -249,7 +251,7 @@ Post.find_or_create_by!(enduser_id: 4) do |post|
 end
 Post.find_or_create_by!(title: "デモンズボックス") do |post|
   post.tag_id = 1
-  post.enduser_id = 4
+  post.enduser_id = 3
   post.body = "【日時】10月21日20時開始
 
 【募集人員】2人（PL6名中4名確定のため）

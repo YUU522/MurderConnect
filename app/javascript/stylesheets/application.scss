@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=BIZ+UDMincho&family=Noto+Serif+JP:wght@300;400&family=Zen+Maru+Gothic&display=swap');
 
   header {
+    background-color: rgba(105, 105, 105, 0.3); /* #696969の色に透明度を追加 */
     height: 40px;
   }
 footer {
@@ -19,11 +20,22 @@ footer {
 p {
     margin: 0; /* デフォルトのマージンを削除 */
 }
+
 body {
   font-family: 'BIZ UDMincho', serif;
-font-family: 'Noto Serif JP', serif;
+  font-family: 'Noto Serif JP', serif;
   padding-bottom: 40px; /* フッターの高さと同じ値を指定 */
+  background-image: url("../images/暗めの背景.png"); /* 画像のパスを指定します */
+  background-size: cover; /* 画像を要素全体に表示させます */
 }
+body.image {
+  font-family: 'BIZ UDMincho', serif;
+  font-family: 'Noto Serif JP', serif;
+  padding-bottom: 40px; /* フッターの高さと同じ値を指定 */
+  background-image: url("../images/背景.png"); /* 画像のパスを指定します */
+  background-size: cover; /* 画像を要素全体に表示させます */
+}
+
 .custom-select {
   padding: 5px;
   border: none;
@@ -34,3 +46,7 @@ font-family: 'Noto Serif JP', serif;
 .white-text {
   color: white; /* テキストの色を白に設定 */
 }
+
+  .container{
+    background: rgba(255, 255, 255, 0.5);
+  }

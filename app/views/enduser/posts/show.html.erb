@@ -22,7 +22,9 @@
               <% end %>
             </div>
           <% end %>
-          <%= link_to '投稿を削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger mt-3' %>
+          <% if current_enduser && @post.enduser_id == current_enduser.id %>
+            <%= link_to '投稿を削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger mt-3' %>
+          <% end %>
         </div>
       </div>
     </div>

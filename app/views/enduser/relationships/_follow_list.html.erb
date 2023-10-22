@@ -1,24 +1,25 @@
+
 <% if @endusers.exists? %>
-  <% @endusers.each do |enduser| %>
-    <% unless enduser.is_deleted %>
-      <table>
-        <thead>
-          <tr>
-            <th>name</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
+  <table>
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>フォロー数</th>
+        <th>フォロワー数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @endusers.each do |enduser| %>
+        <% unless enduser.is_deleted %>
           <tr>
             <td><%= link_to enduser.name, user_path(enduser) %></td>
-            <td>フォロー数: <%= enduser.followings.count %></td>
-            <td>フォロワー数: <%= enduser.followers.count %></td>
+            <td><%= enduser.followings.count %></td>
+            <td><%= enduser.followers.count %></td>
           </tr>
-        </tbody>
-      </table>
-    <% end %>
-  <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
 <% else %>
   <p>ユーザーはいません</p>
 <% end %>

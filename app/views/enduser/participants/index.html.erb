@@ -1,6 +1,13 @@
-<h3 class="mt-4">参加者一覧</h3>
-<ul>
-  <% @post.participants.each do |participant| %>
-    <li><%= participant.enduser.name %></li>
-  <% end %>
-</ul>
+<div class="text-center">
+  <div class="card mt-5" style="display: inline-block; width: 500px; height: 500px; background-color: rgba(255, 255, 255, 0.8);">
+    <div class="card-body">
+      <h3 class="mt-4">参加者一覧</h3>
+      <ul>
+        <% @post.participants.each do |participant| %>
+          <li><%= participant.enduser.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+

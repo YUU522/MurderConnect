@@ -1,1 +1,19 @@
-<%= render partial: 'follow_list', locals: { followers: @followers } %>
+  <div class="container">
+    <div class="content">
+      <%= render partial: 'follow_list', locals: { followers: @followers } %>
+    </div>
+  </div>
+
+<style>
+    .container {
+      display: flex;
+      justify-content: center;
+    }
+    .content {
+      width: 500px;
+      max-width: 600px;
+      padding: 20px;
+      background-color: #fff;
+      text-align: center;
+    }
+</style>

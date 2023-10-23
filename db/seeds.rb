@@ -12,14 +12,20 @@ end
 
 # Enduserのシードデータ
 endusers_data = [
-  { email: "kuro@example.com", name: "くろくろ", password: "111111" },
-  { email: "akira@example.com", name: "あきら", password: "111111" },
-  { email: "yunika@example.com", name: "ゆにか", password: "111111" }
+  { email: "kuro@example.com", name: "くろくろ", password: "111111", bio: "GM：PL　4：6ぐらいでやってます！色々な卓に参加したいのでお誘いお待ちしてます！", image_filename: "sample-user1.png" },
+  { email: "akira@example.com", name: "あきら", password: "111111", bio: "感動系の作品が好きです　中でもドロないがとても好きです", image_filename: "sample-user2.jpg" },
+  { email: "haku@example.com", name: "はく", password: "111111", bio: "ホラー系は苦手です。難易度があまり難しくないものをやりたいです", image_filename: "sample-user3.png" },
+  { email: "eddie@example.com", name: "えでぃ", password: "111111", bio: "推理系しかやりません　RPはそこそこ得意です", image_filename: "sample-user4.png" },
+  { email: "natuki@example.com", name: "なつき", password: "111111", bio: "RPが得意です！何でもやりたいので色々な方とかかわりたいです。", image_filename: "sample-user5.png" },
+  { email: "yunika@example.com", name: "ゆにか", password: "111111", bio: "通過数100超えました　直近の予定はほとんど埋まっているので２か月後からなら空いてます！", image_filename: "sample-user6.png" }
 ]
 endusers_data.each do |data|
   Enduser.find_or_create_by!(email: data[:email]) do |enduser|
     enduser.name = data[:name]
     enduser.password = data[:password]
+    enduser.bio = data[:bio]
+    image_path = File.join(Rails.root, "db/fixtures", data[:image_filename])
+     enduser.profile_picture.attach(io: File.open(image_path), filename: data[:image_filename])
   end
 end
 
@@ -273,3 +279,40 @@ Post.find_or_create_by!(title: "デモンズボックス") do |post|
 ・BOOTH販売ページも事前に確認していただける方＃デモンズボックス"
   post.url = "https://booth.pm/ja/items/2715042"
 end
+
+enduser1 = Enduser.find_by(email: "kuro@example.com")
+enduser2 = Enduser.find_by(email: "akira@example.com")
+enduser3 = Enduser.find_by(email: "haku@example.com")
+enduser4 = Enduser.find_by(email: "eddie@example.com")
+enduser5 = Enduser.find_by(email: "natuki@example.com")
+enduser6 = Enduser.find_by(email: "yunika@example.com")
+
+
+enduser1.followers << enduser2
+enduser1.followers << enduser2
+enduser1.followers << enduser3
+enduser1.save
+
+enduser2.followers << enduser1
+enduser2.followers << enduser3
+enduser2.followers << enduser4
+enduser2.save
+
+enduser3.followers << enduser1
+enduser3.followers << enduser5
+enduser3.followers << enduser6
+enduser3.save
+
+enduser4.followers << enduser1
+enduser4.followers << enduser3
+enduser4.followers << enduser5
+enduser4.save
+
+enduser5.followers << enduser4
+enduser5.followers << enduser6
+enduser5.followers << enduser2
+enduser5.save
+
+enduser6.followers << enduser1
+enduser6.followers << enduser3
+enduser6.save

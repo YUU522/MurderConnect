@@ -6,14 +6,21 @@ class Enduser::UsersController < ApplicationController
     @wantlist = @enduser.wantlist
     @calendars = @enduser.calendars
     @calendar = Calendar.new
-    @wantlist_parts = @enduser.wantlist.split("\n")
-    @sorted_wantlist_parts = @wantlist_parts.sort
-    @sorted_wantlist = @sorted_wantlist_parts.join("\n")
-    @playlist_parts = @enduser.playlist.split("\n")
-    @sorted_playlist_parts = @playlist_parts.sort_by do |item|
-      item.tr('ぁ-ん', 'ァ-ン') # ひらがなをカタカナに変換して比較する
+    if @enduser.wantlist.present?
+      @wantlist_parts = @enduser.wantlist.split("\n")
+      @sorted_wantlist_parts = @wantlist_parts.sort
+      @sorted_wantlist = @sorted_wantlist_parts.join("\n")
+    else
+      @wantlist_parts = []
+      @sorted_wantlist_parts = []
+      @sorted_wantlist = ""
     end
-    @sorted_playlist = @sorted_playlist_parts.join("\n")
+
+    if @enduser.playlist.present?
+      @playlist_parts = @enduser.playlist.split("\n")
+    else
+      @playlist_parts = []
+    end
   end
 
   def new
@@ -75,7 +82,7 @@ class Enduser::UsersController < ApplicationController
         redirect_to posts_path
       end
   end
-  
+
   private
   def board_params
     params.require(:board).permit(:title, :content, :start_time)

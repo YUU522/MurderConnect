@@ -1,34 +1,54 @@
-<h2>Sign up</h2>
+<div class="card">
+<h2>新規登録</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "enduser/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
+    <%= f.label :メールアドレス %><br />
     <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
   </div>
-  
+
   <div class="field">
-    <%= f.label :endusers.name %><br />
+    <%= f.label :ユーザーネーム %><br />
     <%= f.text_field :name, autofocus: true %>
   </div>
-  
+
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :パスワード %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> 文字以上)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :パスワードの確認 %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+  <div class="actions" style="text-align: left;">
+    <%= f.submit "新規登録" %>
   </div>
+  <%= render "enduser/shared/links" %>
 <% end %>
 
-<%= render "enduser/shared/links" %>
+
+</div>
+<style>
+.card {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.field {
+  margin-bottom: 10px;
+}
+
+.actions {
+  text-align: center;
+}
+</style>

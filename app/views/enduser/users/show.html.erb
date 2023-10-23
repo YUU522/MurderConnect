@@ -41,13 +41,21 @@
   </ul>
 
   <div class="tab-content" id="myTabContent">
+
     <div class="tab-pane fade show active" id="playlist" role="tabpanel" aria-labelledby="playlist-tab">
+    <% if @sorted_playlist.present? %>
       <%= raw "<p>" + @sorted_playlist.gsub("\n", "</p><p>") + "</p>".html_safe %>
+    <% end %>
     </div>
 
-    <div class="tab-pane fade" id="wantlist" role="tabpanel" aria-labelledby="wantlist-tab">
+
+
+    <div class="tab-pane fade show active" id="wantlist" role="tabpanel" aria-labelledby="wantlist-tab">
+    <% if @sorted_wantlist.present? %>
       <%= raw "<p>" + @sorted_wantlist.gsub("\n", "</p><p>") + "</p>".html_safe %>
+    <% end %>
     </div>
+
 
     <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
       <% if current_enduser == @enduser %>
@@ -98,6 +106,6 @@
 
 <style>
   .container{
-    background: rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.7);
   }
 </style>

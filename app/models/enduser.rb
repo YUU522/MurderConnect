@@ -21,7 +21,7 @@ class Enduser < ApplicationRecord
   attr_accessor :custom_playlist_name
   attr_accessor :custom_wantlist_name
   
-  validates :name, presence: true, uniqueness: true, length: { minimum: 3, maximum: 20 }
+  validates :name, presence: true, uniqueness: true, length: { minimum: 2, maximum: 20 }
   validates :encrypted_password, presence: true, length: { minimum: 6 }, confirmation: true
   
   def self.guest

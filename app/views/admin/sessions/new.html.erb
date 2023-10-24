@@ -1,26 +1,35 @@
-<h2>Admin Log in</h2>
+<div class="login-card">
+  <h2>管理者ログイン</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <% if devise_mapping.rememberable? %>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :メールアドレス %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :パスワード %><br />
+      <%= f.password_field :password, autocomplete: "current-password" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "ログイン" %>
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+</div>
 
-<%= render "admin/shared/links" %>
+<style>
+  .login-card {
+  background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+  max-width: 400px; /* Adjust the maximum width as needed */
+  margin: 50px auto; /* Center the card horizontally */
+  padding: 20px; /* Add padding for spacing inside the card */
+  border-radius: 10px; /* Add rounded corners if desired */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.field {
+  margin-bottom: 10px;
+}
+</style>

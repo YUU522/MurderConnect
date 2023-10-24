@@ -5,6 +5,7 @@
         <div class="col-3">
           <%= image_tag @post.og_image, class: "card-img-top", width: "200", height: "200" if @post.og_image.present? %>
         </div>
+
         <div class="col-9">
           <h2 class="card-title"><%= @post.title %></h2>
           <p class="card-text">作品ページ: <a href="<%= @post.url %>" target="_blank"><%= @post.url %></a></p>
@@ -13,7 +14,7 @@
           <% @post.hashtags.each do |hashtag| %>
             <%= link_to "##{hashtag.hashname}", search_path(content: "#{hashtag.hashname}", model: "post", method: "perfect"), class: "badge badge-primary mr-2" %>
           <% end %>
-          <% unless current_enduser.nil? || current_enduser.guest? %>
+          <% unless current_enduser.nil? %>
             <div class="mt-4">
               <% if @post.participanted_by?(current_enduser) %>
                 <%= link_to '参加取り消し', post_participant_path(@post, current_enduser.participant_for(@post)), method: :delete, class: 'btn btn-danger' %>
@@ -22,7 +23,9 @@
               <% end %>
             </div>
           <% end %>
-          <% if current_enduser && @post.enduser_id == current_enduser.id %>
+          <%= link_to '参加者一覧', post_participants_path(@post), class: 'btn btn-primary mt-3' %>
+
+          <% if current_enduser && @post.enduser_id == current_enduser.id || current_admin %>
             <%= link_to '投稿を削除', post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger mt-3' %>
           <% end %>
         </div>

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Enduser::ConfirmationsController < Devise::ConfirmationsController
+  before_action :authenticate_enduser!
   # GET /resource/confirmation/new
   # def new
   #   super

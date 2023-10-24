@@ -1,4 +1,5 @@
 class Enduser::PostsController < ApplicationController
+    before_action :authenticate_enduser!
     def new
       if current_enduser
         @post = current_enduser.posts.new

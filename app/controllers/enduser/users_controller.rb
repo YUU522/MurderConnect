@@ -1,4 +1,5 @@
 class Enduser::UsersController < ApplicationController
+  before_action :authenticate_enduser!
   def show
     @enduser = Enduser.find(params[:id])
     @favorites = @enduser.favorites

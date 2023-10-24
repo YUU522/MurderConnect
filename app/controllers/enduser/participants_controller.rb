@@ -1,4 +1,5 @@
 class Enduser::ParticipantsController < ApplicationController
+  before_action :authenticate_enduser!
   def index
     @post = Post.find(params[:post_id])
   end

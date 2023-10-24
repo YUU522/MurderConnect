@@ -1,4 +1,5 @@
 class Enduser::RelationshipsController < ApplicationController
+  before_action :authenticate_enduser!
   # フォローするとき
   def create
     current_enduser.follow(params[:user_id])

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Enduser::SessionsController < Devise::SessionsController
+  before_action :authenticate_enduser!
   # before_action :configure_sign_in_params, only: [:create]
   def guest_sign_in
     enduser = Enduser.guest

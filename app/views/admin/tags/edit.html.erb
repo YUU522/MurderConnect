@@ -1,14 +1,29 @@
-<h1>Edit Tag</h1>
+<div class="card-container">
+    <div class="card-body">
+      <h1 class="card-title">タグ編集</h1>
 
-<%= form_with model: @tag, url: admin_tag_path(@tag), method: :patch, local: true do |form| %>
-  <div class="field">
-    <%= form.label :tag_title %>
-    <%= form.text_field :tag_title %>
+      <%= form_with model: @tag, url: admin_tag_path(@tag), method: :patch, local: true do |form| %>
+        <div class="field">
+          <%= form.label :タグ名%>
+          <%= form.text_field :tag_title, class: "form-control" %>
+        </div>
+
+        <div class="actions mt-4">
+          <%= form.submit "編集", class: "btn btn-primary" %>
+
+          <%= link_to "削除", admin_tag_path(@tag), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= form.submit "Update Tag", class: "btn btn-primary" %>
-
-    <%= link_to "削除", admin_tag_path(@tag), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %>
-  </div>
-<% end %>
+</div>
+<style>
+  .card-container {
+  background-color: rgba(255, 255, 255, 0.8); /* 半透明の白色の背景 */
+  max-width: 400px; /* 必要に応じて最大幅を調整 */
+  margin: 0 auto; /* カードを中央に配置 */
+  padding: 20px; /* カード内の余白を追加 */
+  border-radius: 10px; /* 角を丸める */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 微かな影を追加 */
+}
+</style>

@@ -1,39 +1,27 @@
+<% unless @enduser.is_deleted %>
 <div class="container mt-4">
-  <div class="row">
+  <div class="row pt-3">
     <div class="col-md-2 col-4">
-      <% if @enduser && @enduser.profile_picture.present? %>
-        <%= image_tag @enduser.profile_picture, width: "150", height: "150" %>
-      <% else %>
-        <%= image_tag "default_profile_picture.png", width: "100", height: "100" %>
-      <% end %>
+    <% if @enduser && @enduser.profile_picture.present? %>
+      <%= image_tag @enduser.profile_picture, width: "150", height: "150" %>
+    <% else %>
+      <%= image_tag "default_profile_picture.png", width: "100", height: "100" %>
+    <% end %>
     </div>
     <div class="col-md-6 col-8"> <!-- col-md-6 から col-md-6 col-8 に変更 -->
 
       <h4><%= @enduser.name %></h4>
-        フォロー数:
-        <%= link_to user_followings_path(@enduser.id), class: "some-class" do %>
-           <%= @enduser.followings.count %>
-        <% end %>
-
-        フォロワー数:
-        <%= link_to user_followers_path(@enduser.id), class: "some-class" do %>
-           <%= @enduser.followers.count %>
-        <% end %>
-
+      <p id="follow_counts_<%= @enduser.id %>">
+        <%= render 'enduser/relationships/followers_count', enduser: @enduser %>
+      </p>
       <p><%= @enduser.bio %></p>
-
-      <% if current_enduser && current_enduser != @enduser %>
-        <% if current_enduser.following?(@enduser) %>
-          <%= link_to "フォロー外す", user_relationships_path(@enduser.id), method: :delete %>
-        <% else %>
-          <%= link_to "フォローする", user_relationships_path(@enduser.id), method: :post %>
-        <% end %>
-      <% end %>
-      <%= link_to "投稿一覧", posts_path(enduser_id: @enduser.id) %>
+        <%= link_to "投稿一覧", posts_path(enduser_id: @enduser.id) %>
     </div>
 
     <div class="col-md-4 col-12 text-md-right"> <!-- text-rightを追加 -->
-      <%= link_to 'ユーザー情報を編集', edit_admin_enduser_path(@enduser), class: 'btn btn-primary' %>
+      <% if current_enduser == @enduser %>
+        <%= link_to 'ユーザー情報を編集', edit_user_path(@enduser), class: 'btn btn-primary' %>
+      <% end %>
     </div>
   </div>
 
@@ -44,55 +32,77 @@
     <li class="nav-item">
       <a class="nav-link" id="wantlist-tab" data-toggle="tab" href="#wantlist" role="tab" aria-controls="wantlist" aria-selected="false">やりたい作品</a>
     </li>
+    <li class="nav-item">
+      <a class="nav-link" id="calendar-tab" data-toggle="tab" href="#calendar" role="tab" aria-controls="calendar" aria-selected="false">カレンダー</a>
+    </li>
   </ul>
 
   <div class="tab-content" id="myTabContent">
+
     <div class="tab-pane fade show active" id="playlist" role="tabpanel" aria-labelledby="playlist-tab">
-      <h2>通過リスト</h2>
-      <%= @enduser.playlist %> <!-- ここにプレイリストの表示方法を追加 -->
+    <% if @sorted_playlist.present? %>
+      <%= raw "<p>" + @sorted_playlist.gsub("\n", "</p><p>") + "</p>".html_safe %>
+    <% end %>
     </div>
 
-    <div class="tab-pane fade" id="wantlist" role="tabpanel" aria-labelledby="wantlist-tab">
-      <h2>やりたい作品</h2>
-      <%= @enduser.wantlist %> <!-- ここにウォントリストの表示方法を追加 -->
+
+
+    <div class="tab-pane fade show active" id="wantlist" role="tabpanel" aria-labelledby="wantlist-tab">
+    <% if @sorted_wantlist.present? %>
+      <%= raw "<p>" + @sorted_wantlist.gsub("\n", "</p><p>") + "</p>".html_safe %>
+    <% end %>
     </div>
+
+
+    <div class="tab-pane fade" id="calendar" role="tabpanel" aria-labelledby="calendar-tab">
+      <% if current_enduser == @enduser %>
+        <%= form_with(model: @calendar, local: true, url: '/calendars?id='+params[:id], class: 'mt-4') do |form| %>
+          <div class="form-group">
+            <%= form.label :title %>
+            <%= form.text_field :title, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :start_time %>
+            <%= form.datetime_select :start_time, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= form.label :content %>
+            <%= form.text_field :content, class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <%= form.submit 'Submit', class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+
+      <% end %>
+      <div class="container mt-5">
+        <%= month_calendar events: @calendars do |date, calendars| %>
+          <div class="date">
+            <%= date.day %>
+          </div>
+
+          <% calendars.each do |calendar| %>
+            <div class="event">
+              <%= link_to calendar.title, calendar %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
   </div>
 
   <!-- カレンダーのフォーム -->
-  <% if current_enduser == @enduser %>
-  <%= form_with(model: @calendar, local: true, url: '/calendars?id='+params[:id], class: 'mt-4') do |form| %>
-    <div class="form-group">
-      <%= form.label :title %>
-      <%= form.text_field :title, class: 'form-control' %>
-    </div>
 
-    <div class="form-group">
-      <%= form.label :start_time %>
-      <%= form.datetime_select :start_time, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :content %>
-      <%= form.text_field :content, class: 'form-control' %>
-    </div>
-
-    <div class="form-group">
-      <%= form.submit 'Submit', class: 'btn btn-primary' %>
-    </div>
-  <% end %>
-</div>
+<% else %>
+  <p>ユーザーはいません</p>
 <% end %>
 
-<div class="container mt-5">
-  <%= month_calendar events: @calendars do |date, calendars| %>
-    <div class="date">
-      <%= date.day %>
-    </div>
-
-    <% calendars.each do |calendar| %>
-      <div class="event">
-        <%= link_to calendar.title, calendar %>
-      </div>
-    <% end %>
-  <% end %>
-</div>
+<style>
+  .container{
+    background: rgba(255, 255, 255, 0.7);
+  }
+</style>

@@ -1,22 +1,37 @@
-<%= form_with(model: @calendar, local: true) do |form| %>
+<div class="modal-dialog modal-dialog-centered">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">カレンダーの新規作成</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <%= form_with(model: @calendar, local: true) do |form| %>
+        <div class="form-group">
+          <%= form.label :title, class: "form-tag" %>
+          <%= form.text_field :title, class: "form-control" %>
+        </div>
 
-  <div class="form-group">
-    <%= form.label :title, class: "form-tag" %>
-    <%= form.text_field :title, class: "form-control" %>
+        <div class="form-group">
+          <%= form.label :content, class: "form-tag" %>
+          <%= form.text_field :content, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.label :start_time, class: "form-tag" %>
+          <%= form.datetime_select :start_time, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <%= form.submit "変更", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="form-group">
-    <%= form.label :content, class: "form-tag" %>
-    <%= form.text_field :content, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :start_time, class: "form-tag" %>
-    <%= form.datetime_select :start_time, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= form.submit "Submit", class: "btn btn-primary" %>
-  </div>
-
-<% end %>
+</div>
+<style>
+  .modal-content{
+    background: rgba(255, 255, 255, 0.7);
+  }
+</style>

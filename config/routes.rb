@@ -40,7 +40,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     get "" => "homes#top"
-    resources :posts, only: [:show, :edit, :update, :new, :create]
+    resources :posts
     resources :tags#, only: [:index, :create, :edit, :update]
     resources :endusers
   end

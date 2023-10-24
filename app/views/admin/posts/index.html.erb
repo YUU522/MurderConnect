@@ -1,0 +1,11 @@
+<!-- タブの生成 -->
+<ul class="tab" id="tagTabs">
+  <% @tags.each do |tag| %>
+    <li><a href="#<%= tag.tag_title %>"><%= tag.tag_title %></a></li>
+  <% end %>
+</ul>
+
+
+<%= render partial: "enduser/posts/post_card", locals: { tags: @tags, user_posts: @user_posts } %>
+
+   <%= link_to "新しい投稿", new_post_path, class: "btn btn-primary btn-lg new_button" %>

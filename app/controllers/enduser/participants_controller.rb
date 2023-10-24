@@ -25,7 +25,7 @@ class Enduser::ParticipantsController < ApplicationController
 
 private
   def authenticate_access
-    unless current_admin || current_adomin
+    unless current_admin || current_enduser
       redirect_to new_enduser_session_path, alert: "管理者またはアドミンとしてログインが必要です"
     end
   end

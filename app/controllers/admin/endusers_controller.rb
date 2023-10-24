@@ -19,12 +19,12 @@ class Admin::EndusersController < ApplicationController
   def update
     @enduser = Enduser.find(params[:id])
       if @enduser.update(enduser_params)
-        redirect_to edit_admin_enduser_path(@enduser)
+        redirect_to admin_endusers_path
       else
         render :edit
       end
   end
-  
+
   private
   def enduser_params
     params.require(:enduser).permit(:name, :bio, :playlist, :wantlist, :is_deleted)

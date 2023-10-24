@@ -1,7 +1,7 @@
 <div class="wrapper">
   <ul class="article-list">
     <li>
-      <%= link_to post.title, post %><br>
+      <%= link_to post.title, current_user.is_a?(Admin) ? admin_post_path(post) : post %><br>
       <p>投稿者名: <%= link_to post.enduser.name, user_path(post.enduser) %></p>
       <%= post.body %>
       <% post.hashtags.each do |hashtag| %>

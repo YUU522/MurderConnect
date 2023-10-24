@@ -9,19 +9,20 @@ class Enduser::UsersController < ApplicationController
     @calendar = Calendar.new
     if @enduser.wantlist.present?
       @wantlist_parts = @enduser.wantlist.split("\n")
-      @sorted_wantlist_parts = @wantlist_parts.sort
-      @sorted_wantlist = @sorted_wantlist_parts.join("\n")
     else
       @wantlist_parts = []
-      @sorted_wantlist_parts = []
-      @sorted_wantlist = ""
     end
-
+    @sorted_wantlist_parts = @wantlist_parts.sort
+    @sorted_wantlist = @sorted_wantlist_parts.join("\n")
     if @enduser.playlist.present?
       @playlist_parts = @enduser.playlist.split("\n")
     else
       @playlist_parts = []
     end
+    @sorted_playlist_parts = @playlist_parts.sort_by do |item|
+      item.tr('ぁ-ん', 'ァ-ン') # ひらがなをカタカナに変換して比較する
+    end
+    @sorted_playlist = @sorted_playlist_parts.join("\n")
   end
 
   def new

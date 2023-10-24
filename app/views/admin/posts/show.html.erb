@@ -1,2 +1,27 @@
-<h1>Admin::Posts#show</h1>
-<p>Find me in app/views/admin/posts/show.html.erb</p>
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-3">
+          <%= image_tag @post.og_image, class: "card-img-top", width: "200", height: "200" if @post.og_image.present? %>
+        </div>
+
+        <div class="col-9">
+          <h2 class="card-title"><%= @post.title %></h2>
+          <p class="card-text">作品ページ: <a href="<%= @post.url %>" target="_blank"><%= @post.url %></a></p>
+          <p class="card-text">Body: <%= simple_format(@post.body) %></p>
+          <h5 class="card-subtitle mb-2 text-muted mt-3">ハッシュタグ</h5>
+          <% @post.hashtags.each do |hashtag| %>
+            <%= link_to "##{hashtag.hashname}", search_path(content: "#{hashtag.hashname}", model: "post", method: "perfect"), class: "badge badge-primary mr-2" %>
+          <% end %>
+
+          <%= link_to '参加者一覧', post_participants_path(@post), class: 'btn btn-primary mt-3' %>
+
+          <% if current_enduser && @post.enduser_id == current_enduser.id || current_admin %>
+            <%= link_to '投稿を削除', admin_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger mt-3' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

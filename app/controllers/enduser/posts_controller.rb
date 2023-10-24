@@ -1,5 +1,5 @@
 class Enduser::PostsController < ApplicationController
-    before_action :authenticate_access
+    before_action :authenticate_enduser!
     def new
       if current_enduser
         @post = current_enduser.posts.new
@@ -54,12 +54,6 @@ end
 
   def post_params
     params.require(:post).permit(:title, :url, :body, :tag_id)
-  end
-  
-  def authenticate_access
-    unless current_admin || current_adomin
-      redirect_to new_enduser_session_path, alert: "管理者またはアドミンとしてログインが必要です"
-    end
   end
 end
 

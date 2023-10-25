@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
     link.addEventListener('click', function() {
       var fullTextElement = this.previousElementSibling; // 詳細の全文要素を取得
       var showLessLink = this.nextElementSibling; // 元に戻すリンクを取得
-      var truncatedTextElement = this.parentElement.querySelector('.poster'); // 70文字以内の要素を取得
+      var truncatedTextElement = this.parentElement.querySelector('.poster'); // 70文字以上の要素を取得
 
       truncatedTextElement.style.display = 'none'; // 70文字以内の要素を非表示にする
       fullTextElement.style.display = 'inline'; // 全文を表示

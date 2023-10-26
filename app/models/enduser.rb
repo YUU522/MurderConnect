@@ -6,7 +6,8 @@ class Enduser < ApplicationRecord
 
   has_one_attached :image
   has_one_attached :profile_picture
-
+  has_many :followings, -> { where(is_deleted: false) }, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :followers, -> { where(is_deleted: false) }, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
   # フォローをした、されたの関係
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy

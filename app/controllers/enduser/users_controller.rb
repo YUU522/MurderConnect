@@ -1,29 +1,25 @@
 class Enduser::UsersController < ApplicationController
   before_action :authenticate_enduser!
   def show
-    @enduser = Enduser.find(params[:id])
-    @favorites = @enduser.favorites
-    @playlist = @enduser.playlist
-    @wantlist = @enduser.wantlist
-    @calendars = @enduser.calendars
-    @calendar = Calendar.new
-    if @enduser.wantlist.present?
-      @wantlist_parts = @enduser.wantlist.split("\n")
-    else
-      @wantlist_parts = []
-    end
-    @sorted_wantlist_parts = @wantlist_parts.sort
-    @sorted_wantlist = @sorted_wantlist_parts.join("\n")
-    if @enduser.playlist.present?
-      @playlist_parts = @enduser.playlist.split("\n")
-    else
-      @playlist_parts = []
-    end
-    @sorted_playlist_parts = @playlist_parts.sort_by do |item|
-      item.tr('ぁ-ん', 'ァ-ン') # ひらがなをカタカナに変換して比較する
-    end
-    @sorted_playlist = @sorted_playlist_parts.join("\n")
+  @enduser = Enduser.find(params[:id])
+  @favorites = @enduser.favorites
+  @calendars = @enduser.calendars
+  @calendar = Calendar.new
+
+  # Wantlistの処理
+  @wantlist = @enduser.wantlist
+  @wantlist_parts = @wantlist.present? ? @wantlist.split("\n") : []
+  @sorted_wantlist_parts = @wantlist_parts.sort
+  @sorted_wantlist = @sorted_wantlist_parts.join("\n")
+
+  # Playlistの処理
+  @playlist = @enduser.playlist
+  @playlist_parts = @playlist.present? ? @playlist.split("\n") : []
+  @sorted_playlist_parts = @playlist_parts.sort_by do |item|
+    item.tr('ぁ-ん', 'ァ-ン') # ひらがなをカタカナに変換して比較する
   end
+  @sorted_playlist = @sorted_playlist_parts.join("\n")
+end
 
   def new
     @calendar = Calendar.new

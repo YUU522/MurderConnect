@@ -49,8 +49,7 @@
     </div>
 
 
-
-    <div class="tab-pane fade show active" id="wantlist" role="tabpanel" aria-labelledby="wantlist-tab">
+    <div class="tab-pane fade active" id="wantlist" role="tabpanel" aria-labelledby="wantlist-tab">
     <% if @sorted_wantlist.present? %>
       <%= raw "<p>" + @sorted_wantlist.gsub("\n", "</p><p>") + "</p>".html_safe %>
     <% end %>

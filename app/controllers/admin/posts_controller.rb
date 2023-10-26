@@ -1,6 +1,5 @@
 class Admin::PostsController < ApplicationController
   before_action :authenticate_admin!
-    before_action :authenticate_admin!
     def new
       if current_enduser
         @post = current_enduser.posts.new

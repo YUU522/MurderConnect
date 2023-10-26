@@ -9,7 +9,7 @@
       </ul>
     </div>
     <div class="back-btn">
-      <%= link_to "元に戻る", post_path(@post), class: "btn btn-secondary" %>
+      <%= link_to "元に戻る", current_admin ? admin_post_path(@post) : post_path(@post), class: "btn btn-secondary" %>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 # <マーダーコネクト>
-​
+![ウェブサイトデザイン](app/assets/images/toppage.png)
 ## サイト概要
 マーダーミステリーを遊ぶ人たちがつながりやすいように
 色んな作品に触れやすくなることが目的です。
@@ -38,7 +38,12 @@ PL側のユーザーは野良で参加したい作品には野良で参加希望
 
 ## 設計書
 <!--テーマを設定・提出する時点では不要です-->
-​
+* [実装機能リスト](https://docs.google.com/spreadsheets/d/1dOZ9sZdcn1sfbSDiRSGBEDb7NU5NvtZCuASVBHlNO-I/edit#gid=375590402)
+* [ER図](https://drive.google.com/drive/u/0/folders/1mOovUd6HTQoZ35piqrLUDKZOyvoiMZ7k)
+* [画面遷移図](https://app.diagrams.net/#G1q4wyp7PAp4YR3JXTsKvSg3eMJFGpz3yv)
+* [アプリケーション詳細設計](https://docs.google.com/spreadsheets/d/1oxRnshCmzzMD814biUJmEFZyzwCdlRsrXH2Gcgdm4Es/edit#gid=549108681)
+* [WBS](https://docs.google.com/spreadsheets/d/1C279SB1955XokRmm4FayT0NI8iI6LZWDaMA6BWQlbww/edit#gid=977420151)
+* [テスト仕様書](https://docs.google.com/spreadsheets/d/1JwJ97i4qHRcq_i5tWS6AejJOkOd4UTw_/edit?usp=drive_link&ouid=113453578625944975769&rtpof=true&sd=true)
 ## 開発環境
 - OS：Linux(CentOS)
 - 言語：HTML,CSS,JavaScript,Ruby,SQL

@@ -1,29 +1,31 @@
 class Enduser::PostsController < ApplicationController
-    before_action :authenticate_enduser!
-    def new
-      if current_enduser
-        @post = current_enduser.posts.new
-      else
-        redirect_to new_enduser_session_path, alert: "ログインが必要です"
-      end
+  before_action :authenticate_enduser!
+  def new
+    if current_enduser
+      @post = current_enduser.posts.new
+    else
+      redirect_to new_enduser_session_path, alert: "ログインが必要です"
+    end
+  end
+
+  def index
+    @tags = Tag.all # タグを取得
+
+    if params[:enduser_id].present?
+      @user = Enduser.find(params[:enduser_id])
+      # 特定のユーザーに関連する投稿を取得
+      @user_posts = @user.posts.includes(:hashtags, :tag)
+    else
+      # 全ての投稿を取得
+      @user_posts = Post.includes(:hashtags, :tag)
+      @posts = Post.all.page(params[:page]).per(4)
     end
 
-def index
-  @tags = Tag.all # タグを取得
-
-  if params[:enduser_id].present?
-    @user = Enduser.find(params[:enduser_id])
-    # 特定のユーザーに関連する投稿を取得
-    @user_posts = @user.posts.includes(:hashtags, :tag)
-  else
-    # 全ての投稿を取得
-    @user_posts = Post.includes(:hashtags, :tag)
   end
-end
 
   def create
     @post = current_enduser.posts.new(post_params)
-  
+
     if @post.save
       redirect_to @post, notice: '投稿が作成されました。'
     else
@@ -43,7 +45,7 @@ end
     @post = Post.find(params[:id])
     @tag = Tag.find(@post.tag_id)
   end
-  
+
   def hashtag
     @user = current_user
     @tag = Hashtag.find_by(hashname: params[:name])

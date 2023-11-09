@@ -9,3 +9,5 @@
 <%= render partial: "post_card", locals: { tags: @tags, user_posts: @user_posts } %>
 
    <%= link_to "新しい投稿", new_post_path, class: "btn btn-primary btn-lg new_button" %>
+   
+<%= paginate @posts %>

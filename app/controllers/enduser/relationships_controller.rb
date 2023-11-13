@@ -20,4 +20,7 @@ class Enduser::RelationshipsController < ApplicationController
     enduser = Enduser.find(params[:user_id])
     @endusers = enduser.followers
   end
+  def followingspost
+    @posts = Post.where(enduser_id: [*current_enduser.following_ids])
+  end
 end

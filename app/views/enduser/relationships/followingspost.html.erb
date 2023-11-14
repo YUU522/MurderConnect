@@ -1,7 +1,192 @@
-<% @posts.each do |post| %>
-  <div>
-    <h3><%= post.title %></h3>
-    <p><%= post.body %></p>
-    <!-- 他の投稿情報を表示 -->
+<% tags.each do |tag| %>
+  <div id="<%= tag.tag_title %>" class="area">
+    <div class="row">
+      <% user_posts.where(tag_id: tag.id).each do |post| %>
+        <div class="col-md-3">
+          <div class="card" style="width: 100%; height: 400px; margin: 10px;">
+            <%= link_to (current_admin ? admin_post_path(post) : post) do %>
+              <% if post.og_image.present? %>
+                <%= image_tag post.og_image, class: "fixed-size-image" %>
+              <% else %>
+                <%= image_tag "noimage.png", class: "fixed-size-image" %>
+              <% end %>
+            <% end %>
+            <div class="card-body">
+              <h5 class="card-title"><%= link_to post.title, (current_admin ? admin_post_path(post) : post) %></h5>
+              <p class="card-text">投稿者名: <%= link_to post.enduser.name, user_path(post.enduser) %></p>
+              <% clean_body = post.body.gsub(/\n/, ' ') %>
+              <a class="poster" data-poster="<%= truncate(clean_body, length: 70, separator: ' ', omission: '...') %>">
+                <%= truncate(clean_body, length: 70, separator: ' ', omission: '...') %>
+              </a>
+              <span class="full-text" style="display:none;"><%= simple_format(post.body) %></span>
+              <a class="show-more-link">詳細を見る</a>
+              <a class="show-less-link" style="display:none;">元に戻す</a>
+              ハッシュタグ:<% post.hashtags.limit(3).each do |hashtag| %>
+                <%= link_to "##{hashtag.hashname}", search_path(content: "##{hashtag.hashname}", model: "post", method: "perfect") %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+		</div>
   </div>
 <% end %>
+
+<style>/*tabの形状*/
+.show-more-link,
+.show-less-link {
+  color: #007bff !important;
+  font-size: 14px; /* フォントサイズ */
+}
+.fixed-size-image {
+  width: 100%; /* 例: 幅を300ピクセルに指定 */
+  height: 170px; /* 例: 高さを200ピクセルに指定 */
+  object-fit: cover; /* 画像を親要素にフィットさせる */
+}
+
+.card-body {
+
+}
+
+.tab{
+	display: flex;
+	flex-wrap: wrap;
+}
+.tab li a{
+	display: block;
+	background:#ddd;
+	margin:0 2px;
+	padding:10px 20px;
+}
+/*liにactiveクラスがついた時の形状*/
+.tab li.active a{
+	background:#fff;
+}
+
+
+/*エリアの表示非表示と形状*/
+.area {
+	display: none;/*はじめは非表示*/
+	opacity: 0;/*透過0*/
+	padding:20px 20px;
+}
+
+/*areaにis-activeというクラスがついた時の形状*/
+.area.is-active {
+    display: block;/*表示*/
+    animation-name: displayAnime;/*ふわっと表示させるためのアニメーション*/
+    animation-duration: 2s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes displayAnime{
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+</style>
+<script>
+  //任意のタブにURLからリンクするための設定
+function GethashID (hashIDName){
+	if(hashIDName){
+		//タブ設定
+		$('.tab li').find('a').each(function() { //タブ内のaタグ全てを取得
+			var idName = $(this).attr('href'); //タブ内のaタグのリンク名（例）#lunchの値を取得
+			if(idName == hashIDName){ //リンク元の指定されたURLのハッシュタグ（例）http://example.com/#lunch←この#の値とタブ内のリンク名（例）#lunchが同じかをチェック
+				var parentElm = $(this).parent(); //タブ内のaタグの親要素（li）を取得
+				$('.tab li').removeClass("active"); //タブ内のliについているactiveクラスを取り除き
+				$(parentElm).addClass("active"); //リンク元の指定されたURLのハッシュタグとタブ内のリンク名が同じであれば、liにactiveクラスを追加
+				//表示させるエリア設定
+				$(".area").removeClass("is-active"); //もともとついているis-activeクラスを取り除き
+				$(hashIDName).addClass("is-active"); //表示させたいエリアのタブリンク名をクリックしたら、表示エリアにis-activeクラスを追加
+			}
+		});
+	}
+}
+
+//タブをクリックしたら
+$('.tab a').on('click', function() {
+	var idName = $(this).attr('href'); //タブ内のリンク名を取得
+	GethashID (idName);//設定したタブの読み込みと
+	return false;//aタグを無効にする
+});
+
+$(document).ready(function(){
+  GethashID("#PL"); // #PL タブを表示する
+});
+// 上記の動きをページが読み込まれたらすぐに動かす
+$(window).on('load', function () {
+    var hashName = "#PL"; // ランチのタブを表示したい場合
+    GethashID (hashName);
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  var showMoreLinks = document.querySelectorAll('.show-more-link');
+  var showLessLinks = document.querySelectorAll('.show-less-link');
+
+  showMoreLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      var fullTextElement = this.previousElementSibling; // 詳細の全文要素を取得
+      var showLessLink = this.nextElementSibling; // 元に戻すリンクを取得
+      var truncatedTextElement = this.parentElement.querySelector('.poster'); // 70文字以上の要素を取得
+
+      truncatedTextElement.style.display = 'none'; // 70文字以内の要素を非表示にする
+      fullTextElement.style.display = 'inline'; // 全文を表示
+      this.style.display = 'none'; // 詳細を見るリンクを非表示
+      showLessLink.style.display = 'inline'; // 元に戻すリンクを表示
+
+      var fullText = fullTextElement.innerHTML;
+      fullText = fullText.replace(/<br>/g, ''); // 全ての<br>タグを削除
+      fullTextElement.innerHTML = fullText;
+    });
+  });
+
+showLessLinks.forEach(function(link) {
+  link.addEventListener('click', function() {
+    var fullTextElement = this.previousElementSibling.previousElementSibling;
+    var showMoreLink = this.previousElementSibling;
+    var truncatedTextElement = this.parentElement.querySelector('.poster');
+    var card = this.closest('.card'); // カード要素を取得
+
+    truncatedTextElement.innerHTML = truncatedTextElement.dataset.poster; // HTMLを元に戻す
+    truncatedTextElement.style.display = 'inline';
+    fullTextElement.style.display = 'none';
+    showMoreLink.style.display = 'inline';
+    this.style.display = 'none';
+
+    card.style.height = '400px'; // カードの高さを400pxに戻す
+  });
+});
+
+  var cards = document.querySelectorAll('.card');
+
+  showMoreLinks.forEach(function(link, index) {
+    link.addEventListener('click', function() {
+      var card = cards[index];
+      card.style.height = 'auto';
+    });
+  });
+
+  // 詳細が70文字以内の場合に詳細を見るボタンと元に戻すボタンを非表示にする
+  var posters = document.querySelectorAll('.poster');
+  var full_texts = document.querySelectorAll('.full-text');
+  full_texts.forEach(function(full_text) {
+    console.log(full_text.innerText)
+    console.log(full_text.innerText.length)
+    if (full_text.innerText.length < 71) {
+      var showMoreLink = full_text.nextElementSibling;
+      var showLessLink = showMoreLink.nextElementSibling;
+
+      showMoreLink.style.display = 'none';
+      showLessLink.style.display = 'none';
+    }
+  });
+});
+
+
+</script>
+
